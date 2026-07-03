@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import { Container, SectionHeading } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "AhasanHub",
-  description: "AhasanHub enterprise technology consulting platform.",
+  title: "Products | AhasanHub",
+  description: "Discover future AhasanHub products and digital offerings.",
 };
 
-export default function HomePage() {
+export default function ProductsPage() {
   return (
     <section className="py-section-y sm:py-section-y-sm lg:py-section-y-lg">
       <Container>
         <SectionHeading
-          eyebrow="AhasanHub"
-          title="Home"
-          description="Placeholder page for the AhasanHub home experience."
+          eyebrow="Products"
+          title="Products"
+          description="Placeholder page for future SaaS products, digital tools, and reusable business systems."
         />
       </Container>
     </section>
