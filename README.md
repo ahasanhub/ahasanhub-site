@@ -55,6 +55,9 @@ The project is designed as a production-ready consulting platform rather than a 
 ```text
 src/
 ├── app/
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
 ├── components/
 │   ├── layout/
 │   ├── providers/
@@ -62,11 +65,12 @@ src/
 │   └── ui/
 ├── config/
 ├── data/
-├── hooks/
-├── lib/
-├── styles/
-└── types/
+└── lib/
 ```
+
+Current placeholders are intentionally minimal. Feature-specific components,
+configuration, and data files should be added only when the related UI or
+workflow is implemented.
 
 ---
 
@@ -99,18 +103,18 @@ Future expansion:
 ### Prerequisites
 
 - Node.js (Latest LTS)
-- npm
+- pnpm
 
 ### Install
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Start Development Server
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Open:
@@ -120,13 +124,13 @@ http://localhost:3000
 ### Build Production
 
 ```bash
-npm run build
+pnpm build
 ```
 
 ### Lint
 
 ```bash
-npm run lint
+pnpm lint
 ```
 
 ---
