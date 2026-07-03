@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
+import { Footer, Navbar } from "@/components/layout";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 
@@ -33,22 +34,9 @@ export default function RootLayout({
       <body className="min-h-full bg-background text-foreground">
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
-            <header className="border-b border-foreground/10">
-              <nav
-                className="mx-auto flex h-16 w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8"
-                aria-label="Primary"
-              >
-                Navbar placeholder
-              </nav>
-            </header>
-
+            <Navbar />
             <main className="flex-1">{children}</main>
-
-            <footer className="border-t border-foreground/10">
-              <div className="mx-auto flex min-h-16 w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-                Footer placeholder
-              </div>
-            </footer>
+            <Footer />
           </div>
         </ThemeProvider>
       </body>
