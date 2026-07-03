@@ -21,7 +21,7 @@ export function CardHeader({ className, ...props }: CardProps) {
 
 export function CardTitle({ className, ...props }: CardProps) {
   return (
-    <div
+    <h3
       className={cn("text-lg font-semibold tracking-normal", className)}
       {...props}
     />

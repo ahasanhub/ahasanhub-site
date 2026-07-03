@@ -12,6 +12,7 @@ export default function ServicesPage() {
         <SectionHeading
           eyebrow="Services"
           title="Services"
+          headingLevel="h1"
           description="Placeholder page for consulting, architecture, AI, cloud, ERP, and software delivery services."
         />
       </Container>

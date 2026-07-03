@@ -4,6 +4,7 @@ export type SiteProfile = {
   url: string;
   logoPath: string;
   description: string;
+  contactEmail: string;
   locale: string;
   socialHandle: string;
   focusAreas: string[];
@@ -16,6 +17,7 @@ export const site: SiteProfile = {
   logoPath: "/ahasanhub-logo.png",
   description:
     "AhasanHub is a premium enterprise technology consulting platform for AI, ERP, cloud, SaaS, and software architecture.",
+  contactEmail: "hello@ahasanhub.com",
   locale: "en_US",
   socialHandle: "@ahasanhub",
   focusAreas: [

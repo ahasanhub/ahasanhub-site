@@ -2,6 +2,7 @@
 
 import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 type ThemeOption = {
@@ -18,6 +19,15 @@ const themes: ThemeOption[] = [
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setMounted(true);
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   return (
     <div
@@ -25,7 +35,7 @@ export function ThemeToggle() {
       aria-label="Theme"
     >
       {themes.map(({ label, value, icon: Icon }) => {
-        const isActive = theme === value;
+        const isActive = mounted && theme === value;
 
         return (
           <button

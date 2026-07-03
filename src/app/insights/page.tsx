@@ -12,6 +12,7 @@ export default function InsightsPage() {
         <SectionHeading
           eyebrow="Insights"
           title="Insights"
+          headingLevel="h1"
           description="Placeholder page for articles, technical notes, and strategic technology perspectives."
         />
       </Container>

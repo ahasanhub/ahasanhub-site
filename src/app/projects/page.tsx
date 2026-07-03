@@ -12,6 +12,7 @@ export default function ProjectsPage() {
         <SectionHeading
           eyebrow="Projects"
           title="Projects"
+          headingLevel="h1"
           description="Placeholder page for selected projects, delivery outcomes, and future case studies."
         />
       </Container>

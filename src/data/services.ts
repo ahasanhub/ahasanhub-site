@@ -7,11 +7,11 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    id: "ai-engineering",
-    title: "AI Engineering",
+    id: "ai-consulting",
+    title: "AI Consulting",
     summary:
-      "Practical AI strategy, workflow automation, and intelligent software systems for business operations.",
-    focusAreas: ["AI strategy", "Automation", "Applied LLM systems"],
+      "Practical AI strategy, workflow automation, and applied intelligent systems aligned with business outcomes.",
+    focusAreas: ["AI strategy", "Workflow automation", "Applied LLM systems"],
   },
   {
     id: "erp-architecture",
@@ -21,17 +21,31 @@ export const services: Service[] = [
     focusAreas: ["Business Central", "NAV", "ERP integrations"],
   },
   {
-    id: "cloud-saas",
-    title: "Cloud and SaaS Platforms",
+    id: "cloud-solutions",
+    title: "Cloud Solutions",
     summary:
-      "Cloud-native architecture, scalable SaaS foundations, and secure product delivery practices.",
-    focusAreas: ["Azure", "SaaS architecture", "Platform engineering"],
+      "Secure cloud architecture, platform modernization, and scalable infrastructure foundations.",
+    focusAreas: ["Azure", "Cloud architecture", "Platform modernization"],
   },
   {
-    id: "software-architecture",
-    title: "Software Architecture",
+    id: "saas-development",
+    title: "SaaS Development",
     summary:
-      "Maintainable full-stack systems, architecture reviews, modernization planning, and delivery leadership.",
-    focusAreas: [".NET", "Next.js", "System design"],
+      "Product-ready SaaS foundations, subscription workflows, tenant-aware architecture, and scalable delivery models.",
+    focusAreas: ["Product architecture", "Multi-tenant systems", "Delivery strategy"],
+  },
+  {
+    id: "full-stack-engineering",
+    title: "Full Stack Engineering",
+    summary:
+      "Maintainable web applications, APIs, integration layers, and modern frontend experiences.",
+    focusAreas: [".NET", "Next.js", "API design"],
+  },
+  {
+    id: "system-integration",
+    title: "System Integration",
+    summary:
+      "Reliable integration design across ERP, SaaS, cloud services, APIs, data flows, and operational systems.",
+    focusAreas: ["APIs", "Data flows", "Enterprise systems"],
   },
 ];

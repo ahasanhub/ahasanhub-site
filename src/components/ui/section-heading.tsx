@@ -2,12 +2,14 @@ import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type SectionHeadingAlign = "left" | "center";
+type SectionHeadingLevel = "h1" | "h2";
 
 export type SectionHeadingProps = HTMLAttributes<HTMLDivElement> & {
   eyebrow?: ReactNode;
   title: ReactNode;
   description?: ReactNode;
   align?: SectionHeadingAlign;
+  headingLevel?: SectionHeadingLevel;
 };
 
 const alignments: Record<SectionHeadingAlign, string> = {
@@ -21,8 +23,11 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  headingLevel = "h2",
   ...props
 }: SectionHeadingProps) {
+  const Heading = headingLevel;
+
   return (
     <div
       className={cn("flex max-w-3xl flex-col gap-stack-sm", alignments[align], className)}
@@ -33,9 +38,9 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="text-3xl font-semibold tracking-normal text-foreground sm:text-4xl">
+      <Heading className="text-3xl font-semibold tracking-normal text-foreground sm:text-4xl">
         {title}
-      </h2>
+      </Heading>
       {description ? (
         <p className="text-base leading-7 text-muted-foreground sm:text-lg">
           {description}

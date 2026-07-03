@@ -12,6 +12,7 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="About"
           title="About AhasanHub"
+          headingLevel="h1"
           description="Placeholder page for the AhasanHub story, positioning, and expertise."
         />
       </Container>

@@ -12,6 +12,7 @@ export default function ProductsPage() {
         <SectionHeading
           eyebrow="Products"
           title="Products"
+          headingLevel="h1"
           description="Placeholder page for future SaaS products, digital tools, and reusable business systems."
         />
       </Container>

@@ -12,6 +12,7 @@ export default function ContactPage() {
         <SectionHeading
           eyebrow="Contact"
           title="Contact"
+          headingLevel="h1"
           description="Placeholder page for consulting inquiries, partnerships, and project conversations."
         />
       </Container>
