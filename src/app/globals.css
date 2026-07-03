@@ -3,24 +3,179 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --surface: #ffffff;
+  --surface-muted: #f1f5f9;
+  --surface-elevated: #ffffff;
+  --surface-inverse: #0f172a;
+
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
+
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --input: #e2e8f0;
+  --ring: #2563eb;
+
+  --primary: #dc2626;
+  --primary-foreground: #ffffff;
+  --primary-muted: #fee2e2;
+
+  --premium: #f59e0b;
+  --premium-foreground: #111827;
+  --premium-muted: #fef3c7;
+
+  --tech: #06b6d4;
+  --tech-foreground: #083344;
+  --tech-muted: #cffafe;
+
+  --architecture: #2563eb;
+  --architecture-foreground: #ffffff;
+  --architecture-muted: #dbeafe;
+
+  --success: #16a34a;
+  --warning: #d97706;
+  --destructive: #dc2626;
+
+  --radius-token-sm: 0.375rem;
+  --radius-token-md: 0.5rem;
+  --radius-token-lg: 0.75rem;
+  --radius-token-xl: 1rem;
+  --radius-token-2xl: 1.25rem;
+
+  --space-page-x: 1.5rem;
+  --space-page-x-sm: 2rem;
+  --space-page-x-lg: 3rem;
+  --space-section-y: 5rem;
+  --space-section-y-sm: 6rem;
+  --space-section-y-lg: 7rem;
+  --space-card: 1.5rem;
+  --space-card-lg: 2rem;
+  --space-stack-sm: 0.75rem;
+  --space-stack-md: 1rem;
+  --space-stack-lg: 1.5rem;
+  --space-stack-xl: 2rem;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  color-scheme: dark;
+
+  --background: #020617;
+  --foreground: #f8fafc;
+
+  --surface: #0f172a;
+  --surface-muted: #111827;
+  --surface-elevated: #172033;
+  --surface-inverse: #f8fafc;
+
+  --muted: #111827;
+  --muted-foreground: #cbd5e1;
+
+  --border: #1e293b;
+  --border-strong: #334155;
+  --input: #334155;
+  --ring: #38bdf8;
+
+  --primary: #f87171;
+  --primary-foreground: #450a0a;
+  --primary-muted: #450a0a;
+
+  --premium: #fbbf24;
+  --premium-foreground: #451a03;
+  --premium-muted: #451a03;
+
+  --tech: #22d3ee;
+  --tech-foreground: #083344;
+  --tech-muted: #164e63;
+
+  --architecture: #60a5fa;
+  --architecture-foreground: #0f172a;
+  --architecture-muted: #1e3a8a;
+
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --destructive: #f87171;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-muted: var(--primary-muted);
+  --color-premium: var(--premium);
+  --color-premium-foreground: var(--premium-foreground);
+  --color-premium-muted: var(--premium-muted);
+  --color-tech: var(--tech);
+  --color-tech-foreground: var(--tech-foreground);
+  --color-tech-muted: var(--tech-muted);
+  --color-architecture: var(--architecture);
+  --color-architecture-foreground: var(--architecture-foreground);
+  --color-architecture-muted: var(--architecture-muted);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-destructive: var(--destructive);
+
+  --radius-sm: var(--radius-token-sm);
+  --radius-md: var(--radius-token-md);
+  --radius-lg: var(--radius-token-lg);
+  --radius-xl: var(--radius-token-xl);
+  --radius-2xl: var(--radius-token-2xl);
+
+  --spacing-page-x: var(--space-page-x);
+  --spacing-page-x-sm: var(--space-page-x-sm);
+  --spacing-page-x-lg: var(--space-page-x-lg);
+  --spacing-section-y: var(--space-section-y);
+  --spacing-section-y-sm: var(--space-section-y-sm);
+  --spacing-section-y-lg: var(--space-section-y-lg);
+  --spacing-card: var(--space-card);
+  --spacing-card-lg: var(--space-card-lg);
+  --spacing-stack-sm: var(--space-stack-sm);
+  --spacing-stack-md: var(--space-stack-md);
+  --spacing-stack-lg: var(--space-stack-lg);
+  --spacing-stack-xl: var(--space-stack-xl);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--architecture-muted);
+  color: var(--foreground);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
 }
