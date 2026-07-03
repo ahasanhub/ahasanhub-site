@@ -1,19 +1,20 @@
 export type NavigationItem = {
   label: string;
   href: string;
+  description?: string;
 };
 
 export const primaryNavigation: NavigationItem[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Projects", href: "/projects" },
-  { label: "Insights", href: "/insights" },
-  { label: "Products", href: "/products" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/", description: "AhasanHub overview" },
+  { label: "About", href: "/about", description: "Brand and expertise" },
+  { label: "Services", href: "/services", description: "Consulting services" },
+  { label: "Projects", href: "/projects", description: "Selected work" },
+  { label: "Insights", href: "/insights", description: "Technology writing" },
+  { label: "Products", href: "/products", description: "Digital offerings" },
+  { label: "Contact", href: "/contact", description: "Start a conversation" },
 ];
 
 export const footerNavigation: NavigationItem[] = [
-  { label: "Privacy", href: "/privacy" },
-  { label: "Terms", href: "/terms" },
+  { label: "Privacy", href: "/privacy", description: "Privacy policy" },
+  { label: "Terms", href: "/terms", description: "Terms of service" },
 ];

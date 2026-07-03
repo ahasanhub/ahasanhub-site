@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Container, SectionHeading } from "@/components/ui";
+import { pageSeo } from "@/data/seo";
+import { createSeoMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Products | AhasanHub",
-  description: "Discover future AhasanHub products and digital offerings.",
-};
+export const metadata: Metadata = createSeoMetadata(pageSeo.products);
 
 export default function ProductsPage() {
   return (
