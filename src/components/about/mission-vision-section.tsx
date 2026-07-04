@@ -1,15 +1,22 @@
-import { Card, CardDescription, CardHeader, CardTitle, Container, SectionHeading } from "@/components/ui";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Container,
+  SectionHeading,
+} from "@/components/ui";
 
 const missionVision = [
   {
     title: "Mission",
     description:
-      "Design practical enterprise systems that improve operations, reduce complexity, and create long-term business value.",
+      "To design and build scalable, intelligent, and high-performance digital systems that solve real enterprise problems.",
   },
   {
     title: "Vision",
     description:
-      "Become a trusted technology partner for organizations building intelligent, connected, and cloud-ready business platforms.",
+      "To become a global technology consulting brand recognized for excellence in AI, ERP, SaaS, and software architecture.",
   },
 ];
 

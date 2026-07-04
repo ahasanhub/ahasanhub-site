@@ -2,11 +2,11 @@ import { CheckCircle2 } from "lucide-react";
 import { Card, Container, SectionHeading } from "@/components/ui";
 
 const principles = [
-  "Clarity before complexity",
-  "Architecture that supports business change",
-  "Maintainable systems over short-term shortcuts",
-  "Practical automation with measurable value",
-  "Trust, transparency, and long-term partnership",
+  "Simplicity over complexity",
+  "Scalability over shortcuts",
+  "Engineering over decoration",
+  "Business value over features",
+  "System thinking over isolated solutions",
 ];
 
 export function CorePrinciplesSection() {

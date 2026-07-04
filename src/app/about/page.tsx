@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { AboutCtaSection } from "@/components/about/about-cta-section";
 import { AboutHeroSection } from "@/components/about/about-hero-section";
-import { BrandIdentitySection } from "@/components/about/brand-identity-section";
-import { CorePrinciplesSection } from "@/components/about/core-principles-section";
-import { ExpertiseAreasSection } from "@/components/about/expertise-areas-section";
-import { JourneyTimelineSection } from "@/components/about/journey-timeline-section";
 import { MissionVisionSection } from "@/components/about/mission-vision-section";
+import { AboutIdentitySection } from "@/components/about/about-identity-section";
+import { ExpertiseSection } from "@/components/about/expertise-section";
+import { AboutTimelineSection } from "@/components/about/about-timeline-section";
+import { CorePrinciplesSection } from "@/components/about/core-principles-section";
+import { AboutCTASection } from "@/components/about/about-cta-section";
 import { pageSeo } from "@/data/seo";
 import { createSeoMetadata } from "@/lib/seo";
 
@@ -16,11 +16,11 @@ export default function AboutPage() {
     <main>
       <AboutHeroSection />
       <MissionVisionSection />
-      <BrandIdentitySection />
-      <ExpertiseAreasSection />
-      <JourneyTimelineSection />
+      <AboutIdentitySection />
+      <ExpertiseSection />
+      <AboutTimelineSection />
       <CorePrinciplesSection />
-      <AboutCtaSection />
+      <AboutCTASection />
     </main>
   );
 }
