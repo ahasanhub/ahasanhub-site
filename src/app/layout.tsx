@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
+import { CookieConsent } from "@/components/cookie-consent/CookieConsent";
 import { Footer, Navbar } from "@/components/layout";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { siteConfig } from "@/lib/seo";
@@ -55,6 +56,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
+          <CookieConsent />
         </ThemeProvider>
       </body>
     </html>

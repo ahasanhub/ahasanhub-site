@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { HeroBackground } from "@/components/sections/hero-background";
 import { Badge, Container } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
@@ -16,14 +17,7 @@ export function ServicesHeroSection({ className }: ServicesHeroSectionProps) {
         className,
       )}
     >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_18%_20%,var(--primary-muted),transparent_30%),radial-gradient(circle_at_82%_18%,var(--tech-muted),transparent_26%),radial-gradient(circle_at_50%_88%,var(--premium-muted),transparent_28%),linear-gradient(135deg,var(--background),var(--surface-muted))] dark:bg-[radial-gradient(circle_at_18%_20%,color-mix(in_srgb,var(--primary)_22%,transparent),transparent_30%),radial-gradient(circle_at_82%_18%,color-mix(in_srgb,var(--tech)_20%,transparent),transparent_26%),radial-gradient(circle_at_50%_88%,color-mix(in_srgb,var(--premium)_16%,transparent),transparent_28%),linear-gradient(135deg,var(--background),var(--surface-muted))]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,color-mix(in_srgb,var(--border)_65%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_srgb,var(--border)_65%,transparent)_1px,transparent_1px)] bg-[size:44px_44px] opacity-35 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]"
-      />
+      <HeroBackground />
 
       <Container>
         <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
@@ -38,7 +32,11 @@ export function ServicesHeroSection({ className }: ServicesHeroSectionProps) {
             id="services-hero-title"
             className="mt-7 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl"
           >
-            Enterprise Technology Services That Scale Businesses
+            Enterprise Technology{" "}
+            <span className="bg-gradient-to-r from-primary via-premium to-tech bg-clip-text text-transparent">
+              Services
+            </span>{" "}
+            That Scale Businesses
           </h1>
 
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
