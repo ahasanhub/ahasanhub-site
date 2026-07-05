@@ -10,6 +10,14 @@ export type ServiceDetail = Service & {
   bestFor: string;
 };
 
+export type ServiceDetailSection = {
+  id: string;
+  title: string;
+  description: string;
+  keyFeatures: string[];
+  businessValue: string;
+};
+
 export type WorkProcessStep = {
   step: string;
   title: string;
@@ -17,43 +25,46 @@ export type WorkProcessStep = {
 };
 
 export type TechnologyStackGroup = {
+  id: string;
   category: string;
+  description: string;
   technologies: string[];
 };
 
 export type EngagementModel = {
   name: string;
   description: string;
-  fit: string;
+  idealClient: string;
+  valueProposition: string;
 };
 
 export const services: Service[] = [
   {
-    id: "ai-consulting",
-    title: "AI Consulting",
+    id: "ai-system-development",
+    title: "AI System Development",
     summary:
-      "Practical AI strategy, workflow automation, and applied intelligent systems aligned with business outcomes.",
-    focusAreas: ["AI strategy", "Workflow automation", "Applied LLM systems"],
+      "Applied AI systems, workflow automation, and intelligent product features designed around measurable business value.",
+    focusAreas: ["LLM systems", "Automation", "AI product features"],
   },
   {
-    id: "erp-architecture",
-    title: "ERP Architecture",
+    id: "erp-architecture-integration",
+    title: "ERP Architecture & Integration",
     summary:
-      "Enterprise ERP solution design with a focus on Dynamics 365 Business Central, NAV, integrations, and process alignment.",
+      "Enterprise ERP solution design, Dynamics 365 Business Central architecture, process alignment, and reliable integrations.",
     focusAreas: ["Business Central", "NAV", "ERP integrations"],
   },
   {
-    id: "cloud-solutions",
-    title: "Cloud Solutions",
+    id: "cloud-infrastructure-devops",
+    title: "Cloud Infrastructure & DevOps",
     summary:
-      "Secure cloud architecture, platform modernization, and scalable infrastructure foundations.",
-    focusAreas: ["Azure", "Cloud architecture", "Platform modernization"],
+      "Secure cloud foundations, DevOps automation, observability, and scalable infrastructure for production systems.",
+    focusAreas: ["Azure", "CI/CD", "Observability"],
   },
   {
-    id: "saas-development",
-    title: "SaaS Development",
+    id: "saas-platform-engineering",
+    title: "SaaS Platform Engineering",
     summary:
-      "Product-ready SaaS foundations, subscription workflows, tenant-aware architecture, and scalable delivery models.",
+      "Product-ready SaaS foundations, tenant-aware architecture, subscription workflows, and scalable delivery models.",
     focusAreas: [
       "Product architecture",
       "Multi-tenant systems",
@@ -61,32 +72,39 @@ export const services: Service[] = [
     ],
   },
   {
-    id: "full-stack-engineering",
-    title: "Full Stack Engineering",
+    id: "full-stack-application-development",
+    title: "Full-Stack Application Development",
     summary:
-      "Maintainable web applications, APIs, integration layers, and modern frontend experiences.",
+      "Maintainable web applications, APIs, integration layers, and polished user experiences built with modern engineering standards.",
     focusAreas: [".NET", "Next.js", "API design"],
   },
   {
-    id: "system-integration",
-    title: "System Integration",
+    id: "software-architecture-consulting",
+    title: "Software Architecture Consulting",
     summary:
-      "Reliable integration design across ERP, SaaS, cloud services, APIs, data flows, and operational systems.",
-    focusAreas: ["APIs", "Data flows", "Enterprise systems"],
+      "Architecture reviews, system design, technical roadmaps, and delivery guidance for complex software initiatives.",
+    focusAreas: ["System design", "Architecture reviews", "Roadmaps"],
+  },
+  {
+    id: "digital-transformation-strategy",
+    title: "Digital Transformation Strategy",
+    summary:
+      "Pragmatic modernization strategy connecting business goals, operating models, platforms, and execution priorities.",
+    focusAreas: ["Modernization", "Operating model", "Execution planning"],
   },
 ];
 
 export const serviceDetails: ServiceDetail[] = services.map((service) => {
   const details: Record<string, Omit<ServiceDetail, keyof Service>> = {
-    "ai-consulting": {
+    "ai-system-development": {
       outcomes: [
-        "AI adoption roadmap",
-        "Workflow automation design",
-        "Applied LLM system architecture",
+        "Applied AI system architecture",
+        "Workflow automation delivery",
+        "AI product capability roadmap",
       ],
-      bestFor: "Teams turning AI interest into governed business capability.",
+      bestFor: "Teams turning AI opportunities into governed product and workflow capability.",
     },
-    "erp-architecture": {
+    "erp-architecture-integration": {
       outcomes: [
         "ERP modernization plan",
         "Business Central architecture",
@@ -94,15 +112,15 @@ export const serviceDetails: ServiceDetail[] = services.map((service) => {
       ],
       bestFor: "Organizations improving operational systems and ERP delivery.",
     },
-    "cloud-solutions": {
+    "cloud-infrastructure-devops": {
       outcomes: [
         "Secure Azure foundation",
-        "Cloud migration direction",
-        "Platform reliability improvements",
+        "DevOps and CI/CD operating model",
+        "Reliability and observability improvements",
       ],
       bestFor: "Businesses scaling infrastructure without adding fragility.",
     },
-    "saas-development": {
+    "saas-platform-engineering": {
       outcomes: [
         "SaaS product architecture",
         "Tenant-aware platform foundations",
@@ -110,7 +128,7 @@ export const serviceDetails: ServiceDetail[] = services.map((service) => {
       ],
       bestFor: "Founders and teams building reusable software products.",
     },
-    "full-stack-engineering": {
+    "full-stack-application-development": {
       outcomes: [
         "Modern web application delivery",
         "API and integration layers",
@@ -118,13 +136,21 @@ export const serviceDetails: ServiceDetail[] = services.map((service) => {
       ],
       bestFor: "Teams that need production-grade engineering execution.",
     },
-    "system-integration": {
+    "software-architecture-consulting": {
       outcomes: [
-        "API integration architecture",
-        "Reliable data flow design",
-        "Connected enterprise workflows",
+        "Architecture review and recommendations",
+        "System design decisions",
+        "Technical roadmap clarity",
       ],
-      bestFor: "Organizations connecting ERP, SaaS, cloud, and data systems.",
+      bestFor: "Teams making technical decisions with long-term platform impact.",
+    },
+    "digital-transformation-strategy": {
+      outcomes: [
+        "Modernization strategy",
+        "Operating model alignment",
+        "Prioritized execution roadmap",
+      ],
+      bestFor: "Organizations connecting technology investment to business change.",
     },
   };
 
@@ -134,78 +160,214 @@ export const serviceDetails: ServiceDetail[] = services.map((service) => {
   };
 });
 
+export const serviceDetailSections: ServiceDetailSection[] = [
+  {
+    id: "ai-systems",
+    title: "AI Systems",
+    description:
+      "Design and build applied AI capabilities that connect models, business rules, data, and human workflows into dependable operating systems.",
+    keyFeatures: ["Automation", "Predictive systems", "Workflows"],
+    businessValue:
+      "Reduces manual effort, improves decision speed, and turns AI initiatives into practical business capability instead of isolated experiments.",
+  },
+  {
+    id: "erp",
+    title: "ERP",
+    description:
+      "Shape ERP architecture, integrations, and process flows around real operating needs across finance, inventory, sales, projects, and service teams.",
+    keyFeatures: ["Integration", "Enterprise workflows", "Optimization"],
+    businessValue:
+      "Improves operational visibility, removes disconnected processes, and creates a cleaner foundation for scalable enterprise execution.",
+  },
+  {
+    id: "cloud",
+    title: "Cloud",
+    description:
+      "Create secure cloud foundations with infrastructure patterns, delivery automation, monitoring, and DevOps practices built for production growth.",
+    keyFeatures: ["Scaling", "Infrastructure", "DevOps pipelines"],
+    businessValue:
+      "Increases platform reliability, shortens release cycles, and gives teams the infrastructure confidence to scale without avoidable complexity.",
+  },
+  {
+    id: "saas-platforms",
+    title: "SaaS Platforms",
+    description:
+      "Build product-ready SaaS foundations with tenant-aware architecture, account models, subscription paths, and reusable platform capabilities.",
+    keyFeatures: ["Tenant models", "Product foundations", "Delivery systems"],
+    businessValue:
+      "Accelerates product delivery while keeping the platform maintainable as users, pricing models, and operational demands grow.",
+  },
+  {
+    id: "full-stack-applications",
+    title: "Full-Stack Applications",
+    description:
+      "Deliver polished web applications, APIs, integration layers, and frontend experiences with maintainable engineering standards.",
+    keyFeatures: ["Web apps", "APIs", "User experience"],
+    businessValue:
+      "Turns business requirements into reliable software that users can adopt quickly and teams can extend without constant rework.",
+  },
+  {
+    id: "software-architecture",
+    title: "Software Architecture",
+    description:
+      "Provide architecture reviews, system design, platform direction, and technical roadmap decisions for complex software initiatives.",
+    keyFeatures: ["System design", "Architecture reviews", "Technical roadmaps"],
+    businessValue:
+      "Clarifies tradeoffs early, reduces delivery risk, and helps teams make decisions that remain sound beyond the first release.",
+  },
+  {
+    id: "digital-transformation",
+    title: "Digital Transformation",
+    description:
+      "Connect modernization goals with operating models, platform choices, data flows, and execution priorities that teams can actually deliver.",
+    keyFeatures: ["Modernization", "Operating models", "Execution planning"],
+    businessValue:
+      "Aligns technology investment with measurable business change and gives leadership a practical roadmap from strategy to adoption.",
+  },
+];
+
 export const workProcessSteps: WorkProcessStep[] = [
   {
     step: "01",
-    title: "Diagnose",
+    title: "Discovery & Consultation",
     description:
-      "Clarify the business problem, operational constraints, users, risks, and measurable outcomes before recommending a solution.",
+      "Clarify business goals, operating constraints, user needs, risks, and the measurable outcomes the system must support.",
   },
   {
     step: "02",
-    title: "Architect",
+    title: "System Architecture Design",
     description:
-      "Define system boundaries, platform choices, integration flows, delivery phases, and the simplest path to production value.",
+      "Define platform choices, system boundaries, data flows, integration points, and the simplest architecture that can scale.",
   },
   {
     step: "03",
-    title: "Deliver",
+    title: "Development & Engineering",
     description:
-      "Build the foundation with clean implementation standards, review loops, documentation, and production readiness in mind.",
+      "Build the core experience, APIs, integrations, automation, and reusable foundations with clean engineering standards.",
   },
   {
     step: "04",
-    title: "Scale",
+    title: "Testing & Optimization",
     description:
-      "Improve reliability, automation, analytics, and future expansion paths as the system matures.",
+      "Validate functionality, performance, accessibility, reliability, and operational quality before production release.",
+  },
+  {
+    step: "05",
+    title: "Deployment & Scaling",
+    description:
+      "Release with production readiness, monitoring, documentation, and a clear path for scaling the platform after launch.",
   },
 ];
 
 export const technologyStackGroups: TechnologyStackGroup[] = [
   {
-    category: "Frontend",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "React"],
+    id: "frontend-engineering",
+    category: "Frontend Engineering",
+    description:
+      "Modern web interfaces built with App Router architecture, type safety, and reusable component systems.",
+    technologies: ["Next.js (App Router)", "TypeScript", "React"],
   },
   {
-    category: "Backend",
-    technologies: [".NET", "API design", "SQL", "Integration services"],
-  },
-  {
-    category: "Cloud",
-    technologies: ["Azure", "DevOps", "CI/CD", "Observability"],
-  },
-  {
-    category: "ERP",
-    technologies: ["Dynamics 365", "Business Central", "NAV", "AL"],
-  },
-  {
-    category: "AI",
+    id: "backend-enterprise-development",
+    category: "Backend & Enterprise Development",
+    description:
+      "Enterprise-grade application foundations for APIs, integrations, domain logic, and scalable service boundaries.",
     technologies: [
-      "LLM systems",
-      "Automation",
-      "Knowledge workflows",
-      "AI governance",
+      ".NET / ASP.NET Core",
+      "C#",
+      "RESTful API development",
+      "Microservices architecture",
+      "Clean Architecture pattern",
+    ],
+  },
+  {
+    id: "cloud-infrastructure",
+    category: "Cloud & Infrastructure",
+    description:
+      "Cloud architecture and delivery systems designed for reliability, security, automation, and long-term scale.",
+    technologies: [
+      "AWS",
+      "Microsoft Azure",
+      "Cloud Architecture Design",
+      "DevOps & CI/CD pipelines",
+      "Docker & containerization",
+    ],
+  },
+  {
+    id: "enterprise-systems",
+    category: "Enterprise Systems",
+    description:
+      "ERP-focused system design across Microsoft platforms, business workflows, automation, and integration layers.",
+    technologies: [
+      "Microsoft Dynamics 365",
+      "Custom ERP development",
+      "Business process automation",
+      "Enterprise system integration",
+      "Microsoft ecosystem solutions",
+    ],
+  },
+  {
+    id: "ai-machine-learning",
+    category: "AI & Machine Learning",
+    description:
+      "Applied AI capabilities for enterprise workflows, prediction, decision support, and intelligent automation.",
+    technologies: [
+      "AI-powered enterprise systems",
+      "LLM integration",
+      "Intelligent automation workflows",
+      "Predictive analytics systems",
+      "Data-driven decision systems",
+    ],
+  },
+  {
+    id: "saas-platform-engineering",
+    category: "SaaS & Platform Engineering",
+    description:
+      "Platform architecture for multi-tenant products, API-first systems, and distributed software foundations.",
+    technologies: [
+      "Multi-tenant SaaS architecture",
+      "Scalable backend systems",
+      "API-first development",
+      "System design & distributed architecture",
     ],
   },
 ];
 
 export const engagementModels: EngagementModel[] = [
   {
-    name: "Advisory Sprint",
+    name: "Hourly Consulting",
     description:
-      "A focused strategy and architecture engagement for decisions that need executive clarity before investment.",
-    fit: "Best for discovery, validation, audits, and roadmap creation.",
+      "Flexible expert support for targeted technical decisions, architecture questions, ERP guidance, cloud planning, or implementation blockers.",
+    idealClient:
+      "Teams that need senior technical input without committing to a full project.",
+    valueProposition:
+      "Fast access to practical enterprise expertise for decisions that need clarity now.",
   },
   {
-    name: "Architecture Partnership",
+    name: "Project-Based Development",
     description:
-      "Ongoing technical leadership for teams shaping ERP, SaaS, AI, cloud, or integration platforms.",
-    fit: "Best for complex initiatives that need senior architecture guidance.",
+      "End-to-end delivery for defined AI, ERP, cloud, SaaS, or full-stack initiatives with clear scope, milestones, and production outcomes.",
+    idealClient:
+      "Businesses with a specific product, platform, integration, or modernization initiative.",
+    valueProposition:
+      "Turns strategic requirements into production-ready software with accountable delivery.",
   },
   {
-    name: "Delivery Collaboration",
+    name: "Long-Term Enterprise Partnership",
     description:
-      "Hands-on implementation support for production foundations, integrations, full-stack systems, and modernization work.",
-    fit: "Best for teams that need strategy connected directly to execution.",
+      "Ongoing architecture, engineering, platform evolution, and technical leadership across multiple enterprise workstreams.",
+    idealClient:
+      "Organizations scaling systems over time and needing a trusted senior technology partner.",
+    valueProposition:
+      "Provides continuity, governance, and strategic execution across long-running digital initiatives.",
+  },
+  {
+    name: "Architecture Advisory",
+    description:
+      "Focused review and guidance for system architecture, cloud strategy, ERP integration, SaaS foundations, and engineering standards.",
+    idealClient:
+      "Leaders and engineering teams validating important technical decisions before investment.",
+    valueProposition:
+      "Reduces technical risk by clarifying architecture tradeoffs before they become expensive constraints.",
   },
 ];

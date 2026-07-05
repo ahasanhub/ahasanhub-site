@@ -1,4 +1,11 @@
-import { Container } from "@/components/ui";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Container,
+  SectionHeading,
+} from "@/components/ui";
 import { engagementModels } from "@/data/services";
 
 export function EngagementModelsSection() {
@@ -8,36 +15,47 @@ export function EngagementModelsSection() {
       aria-labelledby="services-engagement-title"
     >
       <Container>
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-primary">
-              Engagement models
-            </p>
-            <h2
-              id="services-engagement-title"
-              className="mt-4 text-3xl font-semibold tracking-normal text-foreground sm:text-4xl"
-            >
-              Flexible models for advisory, architecture, and delivery.
-            </h2>
-          </div>
-          <div className="divide-y divide-border border-y border-border">
+        <div className="flex flex-col gap-12">
+          <SectionHeading
+            id="services-engagement-title"
+            eyebrow="Engagement models"
+            title="Flexible ways to bring enterprise technology leadership into the work."
+            description="Choose the collaboration model that fits the level of strategic guidance, architecture ownership, and delivery support your initiative needs."
+          />
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {engagementModels.map((model) => (
-              <div
+              <Card
                 key={model.name}
-                className="grid gap-4 py-6 md:grid-cols-[0.75fr_1.25fr]"
+                className="flex h-full flex-col rounded-2xl transition-all duration-200 ease-out hover:-translate-y-1 hover:border-border-strong hover:shadow-md"
               >
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {model.name}
-                  </h3>
-                  <p className="mt-2 text-sm font-medium text-architecture">
-                    {model.fit}
+                <CardHeader>
+                  <CardTitle className="text-lg">{model.name}</CardTitle>
+                  <p className="text-sm leading-6 text-muted-foreground">
+                    {model.description}
                   </p>
-                </div>
-                <p className="text-sm leading-6 text-muted-foreground">
-                  {model.description}
-                </p>
-              </div>
+                </CardHeader>
+
+                <CardContent className="mt-auto space-y-5">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-architecture">
+                      Ideal client
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                      {model.idealClient}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-primary">
+                      Value proposition
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-foreground">
+                      {model.valueProposition}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>

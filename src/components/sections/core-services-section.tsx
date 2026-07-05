@@ -1,16 +1,15 @@
 import {
   Bot,
-  Boxes,
-  Cloud,
+  CloudCog,
   Code2,
-  Database,
-  Workflow,
+  Compass,
+  DatabaseZap,
+  Layers3,
+  Network,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import {
-  Badge,
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -22,18 +21,18 @@ import { cn } from "@/lib/utils";
 
 type ServiceIcon = ComponentType<SVGProps<SVGSVGElement>>;
 
-export type ServicesSectionProps = {
+export type CoreServicesSectionProps = {
   className?: string;
 };
 
 const serviceIcons: Record<string, ServiceIcon> = {
   "ai-system-development": Bot,
-  "erp-architecture-integration": Database,
-  "cloud-infrastructure-devops": Cloud,
-  "saas-platform-engineering": Boxes,
+  "erp-architecture-integration": DatabaseZap,
+  "cloud-infrastructure-devops": CloudCog,
+  "saas-platform-engineering": Layers3,
   "full-stack-application-development": Code2,
-  "software-architecture-consulting": Workflow,
-  "digital-transformation-strategy": Workflow,
+  "software-architecture-consulting": Network,
+  "digital-transformation-strategy": Compass,
 };
 
 const serviceIconTones: Record<string, string> = {
@@ -46,52 +45,49 @@ const serviceIconTones: Record<string, string> = {
   "digital-transformation-strategy": "bg-architecture-muted text-architecture",
 };
 
-export function ServicesSection({ className }: ServicesSectionProps) {
+export function CoreServicesSection({ className }: CoreServicesSectionProps) {
   return (
     <section
       className={cn(
         "border-b border-border bg-background py-section-y sm:py-section-y-sm lg:py-section-y-lg",
         className,
       )}
+      aria-labelledby="core-services-heading"
     >
       <Container>
         <div className="flex flex-col gap-10">
           <SectionHeading
-            eyebrow="Services"
-            title="Enterprise technology services"
-            description="Focused consulting and engineering services for organizations that need durable architecture, reliable delivery, and systems that scale."
+            id="core-services-heading"
+            eyebrow="Core services"
+            title="Enterprise technology services for scalable systems."
+            description="Focused architecture, engineering, and transformation services for organizations that need durable platforms, reliable delivery, and credible execution."
           />
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => {
               const Icon = serviceIcons[service.id];
 
               return (
                 <Card
                   key={service.id}
-                  className="flex h-full flex-col transition-colors hover:border-border-strong"
+                  className="group flex h-full flex-col transition-colors hover:border-border-strong"
                 >
-                  <CardHeader>
+                  <CardHeader className="gap-5">
                     <div
                       className={cn(
-                        "flex size-11 items-center justify-center rounded-xl",
+                        "flex size-10 items-center justify-center rounded-lg transition-colors group-hover:bg-surface-elevated",
                         serviceIconTones[service.id],
                       )}
                     >
                       <Icon aria-hidden="true" className="size-5" />
                     </div>
-                    <CardTitle>{service.title}</CardTitle>
-                    <CardDescription>{service.summary}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="mt-auto">
-                    <div className="flex flex-wrap gap-2">
-                      {service.focusAreas.map((focusArea) => (
-                        <Badge key={focusArea} variant="neutral">
-                          {focusArea}
-                        </Badge>
-                      ))}
+                    <div className="space-y-2">
+                      <CardTitle className="text-base">
+                        {service.title}
+                      </CardTitle>
+                      <CardDescription>{service.summary}</CardDescription>
                     </div>
-                  </CardContent>
+                  </CardHeader>
                 </Card>
               );
             })}

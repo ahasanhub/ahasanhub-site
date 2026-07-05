@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import {
   ContactCTASection,
+  CoreServicesSection,
   HeroSection,
   InsightsSection,
   ProjectsSection,
-  ServicesSection,
 } from "@/components/sections";
 import { pageSeo } from "@/data/seo";
 import { createSeoMetadata } from "@/lib/seo";
@@ -15,7 +15,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <ServicesSection />
+      <CoreServicesSection />
       <ProjectsSection />
       <InsightsSection />
       <ContactCTASection />
