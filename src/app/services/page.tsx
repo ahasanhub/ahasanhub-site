@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
-import { Container, SectionHeading } from "@/components/ui";
+import {
+  CoreServicesOverview,
+  DetailedServicesBreakdown,
+  EngagementModelsSection,
+  ServicesCTASection,
+  ServicesHeroSection,
+  TechnologyStackSection,
+  WorkProcessSection,
+} from "@/components/services";
 import { pageSeo } from "@/data/seo";
 import { createSeoMetadata } from "@/lib/seo";
 
@@ -7,15 +15,14 @@ export const metadata: Metadata = createSeoMetadata(pageSeo.services);
 
 export default function ServicesPage() {
   return (
-    <section className="py-section-y sm:py-section-y-sm lg:py-section-y-lg">
-      <Container>
-        <SectionHeading
-          eyebrow="Services"
-          title="Services"
-          headingLevel="h1"
-          description="Placeholder page for consulting, architecture, AI, cloud, ERP, and software delivery services."
-        />
-      </Container>
-    </section>
+    <main>
+      <ServicesHeroSection />
+      <CoreServicesOverview />
+      <DetailedServicesBreakdown />
+      <WorkProcessSection />
+      <TechnologyStackSection />
+      <EngagementModelsSection />
+      <ServicesCTASection />
+    </main>
   );
 }
