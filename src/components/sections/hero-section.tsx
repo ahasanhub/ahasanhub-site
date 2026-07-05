@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Network } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Badge, Container } from "@/components/ui";
@@ -20,25 +20,25 @@ export type HeroSectionProps = {
 };
 
 export function HeroSection({
-  eyebrow = "Premium technology consulting for scalable systems",
+  eyebrow = "AI-First Enterprise Transformation & Systems Engineering",
   title = (
     <>
-      <span className="inline-block whitespace-nowrap">Connect. Create.</span>
+      <span className="inline-block bg-gradient-to-r from-architecture via-tech to-primary bg-clip-text text-transparent">
+        AI-Powered
+      </span>{" "}
+      <span className="inline-block">Enterprise Systems</span>
       <br />
-      <span className="inline-block whitespace-nowrap">Grow with</span>
-      <br />
+      <span className="inline-block">That Think, Adapt &amp; </span>
       <span className="inline-block bg-gradient-to-r from-primary via-premium to-tech bg-clip-text text-transparent">
-        modern
+        Automate
       </span>
       <br />
-      <span className="inline-block bg-gradient-to-r from-premium via-architecture to-tech bg-clip-text text-transparent">
-        software.
-      </span>
+      <span className="inline-block">Modernize Everything Behind Your Business</span>
     </>
   ),
-  description = "AhasanHub designs and builds AI automation, ERP platforms, cloud-ready SaaS products, and full-stack business systems with a clean enterprise-grade delivery approach.",
-  primaryCta = { label: "Start Project", href: "/contact" },
-  secondaryCta = { label: "View Services", href: "/services" },
+  description = "AhasanHub designs and engineers AI-integrated enterprise systems that connect legacy infrastructure, ERP platforms, and modern applications into intelligent, automated business ecosystems.",
+  primaryCta = { label: "Start AI Transformation", href: "/contact" },
+  secondaryCta = { label: "Explore Capabilities", href: "/services" },
   className,
 }: HeroSectionProps) {
   return (
@@ -50,19 +50,23 @@ export function HeroSection({
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_18%_18%,var(--primary-muted),transparent_28%),radial-gradient(circle_at_84%_14%,var(--tech-muted),transparent_24%),radial-gradient(circle_at_58%_78%,var(--premium-muted),transparent_26%),linear-gradient(135deg,var(--background),var(--surface-muted))] dark:bg-[radial-gradient(circle_at_18%_18%,color-mix(in_srgb,var(--primary)_24%,transparent),transparent_30%),radial-gradient(circle_at_84%_14%,color-mix(in_srgb,var(--tech)_22%,transparent),transparent_24%),radial-gradient(circle_at_58%_78%,color-mix(in_srgb,var(--premium)_18%,transparent),transparent_28%),linear-gradient(135deg,var(--background),var(--surface-muted))]"
+        className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_12%_18%,color-mix(in_srgb,var(--architecture)_16%,transparent),transparent_28%),radial-gradient(circle_at_80%_16%,color-mix(in_srgb,var(--tech)_16%,transparent),transparent_25%),radial-gradient(circle_at_52%_82%,color-mix(in_srgb,var(--primary)_10%,transparent),transparent_30%),linear-gradient(135deg,var(--background),var(--surface-muted))] dark:bg-[radial-gradient(circle_at_12%_18%,color-mix(in_srgb,var(--architecture)_20%,transparent),transparent_30%),radial-gradient(circle_at_80%_16%,color-mix(in_srgb,var(--tech)_18%,transparent),transparent_26%),radial-gradient(circle_at_52%_82%,color-mix(in_srgb,var(--primary)_14%,transparent),transparent_32%),linear-gradient(135deg,var(--background),var(--surface-muted))]"
       />
       <div
         aria-hidden="true"
-        className="absolute -left-24 top-20 -z-10 size-72 rounded-full bg-tech/20 blur-3xl dark:bg-tech/15"
+        className="absolute -left-24 top-20 -z-10 size-72 rounded-full bg-architecture/12 blur-3xl dark:bg-architecture/16"
       />
       <div
         aria-hidden="true"
-        className="absolute -right-20 bottom-8 -z-10 size-80 rounded-full bg-premium/25 blur-3xl dark:bg-premium/15"
+        className="absolute -right-20 bottom-8 -z-10 size-80 rounded-full bg-tech/14 blur-3xl dark:bg-tech/16"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,color-mix(in_srgb,var(--border)_72%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_srgb,var(--border)_72%,transparent)_1px,transparent_1px)] bg-[size:44px_44px] opacity-45 [mask-image:linear-gradient(to_bottom,black,transparent_88%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,color-mix(in_srgb,var(--border)_62%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_srgb,var(--border)_62%,transparent)_1px,transparent_1px)] bg-[size:48px_48px] opacity-45 [mask-image:radial-gradient(circle_at_50%_26%,black,transparent_74%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle,color-mix(in_srgb,var(--architecture)_30%,transparent)_1px,transparent_1px)] bg-[size:22px_22px] opacity-[0.08]"
       />
 
       <Container>
@@ -70,17 +74,17 @@ export function HeroSection({
           <div className="mx-auto max-w-3xl text-center [animation:fade-up_600ms_ease-out_both] lg:mx-0 lg:text-left">
             <Badge
               variant="neutral"
-              className="gap-3 rounded-full border border-white/70 bg-surface/82 px-4 py-2.5 text-sm font-bold text-foreground shadow-[0_16px_36px_color-mix(in_srgb,var(--foreground)_12%,transparent)] backdrop-blur-xl dark:border-white/10 dark:bg-surface/60 sm:text-base"
+              className="gap-3 rounded-full border border-tech/20 bg-surface/82 px-4 py-2.5 text-sm font-bold text-foreground shadow-[0_16px_36px_color-mix(in_srgb,var(--tech)_14%,transparent)] backdrop-blur-xl dark:border-tech/20 dark:bg-surface/60 sm:text-base"
             >
               <span
                 aria-hidden="true"
                 className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-tech-muted text-sm font-extrabold text-tech"
               >
-                AI
+                <Network className="size-5" />
               </span>
               <span>{eyebrow}</span>
             </Badge>
-            <h1 className="mt-8 text-[2.25rem] font-extrabold leading-[0.99] tracking-tight text-foreground min-[375px]:text-[2.65rem] sm:text-[3.95rem] lg:text-[4.05rem] xl:text-[4.75rem]">
+            <h1 className="mt-8 text-[2.55rem] font-extrabold leading-[1.02] text-foreground min-[375px]:text-[2.9rem] sm:text-[4rem] lg:text-[4.15rem] xl:text-[4.8rem]">
               {title}
             </h1>
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9 lg:mx-0">
