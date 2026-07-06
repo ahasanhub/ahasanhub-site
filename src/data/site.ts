@@ -17,7 +17,7 @@ export const site: SiteProfile = {
   logoPath: "/ahasanhub-logo.png",
   description:
     "AhasanHub is a premium enterprise technology consulting platform for AI, ERP, cloud, SaaS, and software architecture.",
-  contactEmail: "info@ahasanhub.com",
+  contactEmail: "ahasan.cse03@gmail.com",
   locale: "en_US",
   socialHandle: "@ahasanhub",
   focusAreas: [
