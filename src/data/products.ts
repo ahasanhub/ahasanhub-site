@@ -59,7 +59,15 @@ export const featuredProducts: FeaturedProduct[] = [
     description:
       "A production-ready multi-tenant software boilerplate configured with role-based auth, secure subscription pipelines, and organization schemas.",
     useCase: "Accelerating the development and launch of secure software-as-a-service portals.",
-    techStack: ["Next.js App Router", "Tailwind CSS", "Prisma / Postgres", "Stripe API"],
+    techStack: [
+      "Next.js App Router",
+      "Tailwind CSS",
+      ".NET",
+      "SQL Server",
+      "Azure",
+      "Prisma / Postgres",
+      "Stripe API",
+    ],
     targetUsers: "Business",
   },
   {

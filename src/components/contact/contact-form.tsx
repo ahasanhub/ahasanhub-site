@@ -36,9 +36,12 @@ const budgetRanges = [
   "Not sure yet",
 ];
 
+const adminApiUrl = process.env.NEXT_PUBLIC_ADMIN_API_URL?.replace(/\/$/, "");
+
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submittedData, setSubmittedData] = useState<{
     fullName: string;
     email: string;
@@ -48,23 +51,74 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
 
     const formData = new FormData(e.currentTarget);
     const fullName = formData.get("fullName") as string;
     const email = formData.get("email") as string;
+    const company = formData.get("company") as string;
     const projectType = formData.get("projectType") as string;
+    const budgetRange = formData.get("budgetRange") as string;
+    const message = formData.get("message") as string;
 
-    // Simulate standard latency for premium feel
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      if (!adminApiUrl) {
+        throw new Error("Contact API URL is not configured.");
+      }
 
-    setSubmittedData({ fullName, email, projectType });
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      const response = await fetch(`${adminApiUrl}/api/messages`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          emailAddress: email,
+          company,
+          projectType,
+          budgetRange,
+          message,
+        }),
+      });
+
+      if (!response.ok) {
+        let errorMessage = "Message submission failed.";
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.message || errorData.error || errorMessage;
+        } catch {
+          if (response.statusText) {
+            errorMessage = `${response.status} ${response.statusText}`;
+          } else {
+            errorMessage = `Error code: ${response.status}`;
+          }
+        }
+        throw new Error(errorMessage);
+      }
+
+      setSubmittedData({ fullName, email, projectType });
+      setIsSubmitted(true);
+    } catch (err) {
+      if (err instanceof Error) {
+        if (err.message === "Failed to fetch" || err.name === "TypeError") {
+          setSubmitError(
+            `Failed to connect to the server (${err.message}). Please check if the API is running or try again later.`,
+          );
+        } else {
+          setSubmitError(err.message);
+        }
+      } else {
+        setSubmitError(
+          "We could not send your inquiry right now. Please try again in a moment.",
+        );
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
     setSubmittedData(null);
+    setSubmitError(null);
   };
 
   if (isSubmitted && submittedData) {
@@ -130,8 +184,8 @@ export function ContactForm() {
       <CardHeader className="border-b border-border/70">
         <CardTitle id="project-inquiry-title">Project inquiry</CardTitle>
         <CardDescription id="project-inquiry-description">
-          Required fields are marked. No information is submitted until a
-          backend action is connected.
+          Required fields are marked. Your inquiry is sent securely to the
+          AhasanHub admin workspace.
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-card">
@@ -252,6 +306,15 @@ export function ContactForm() {
               disabled={isSubmitting}
             />
           </div>
+
+          {submitError ? (
+            <p
+              className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm leading-6 text-destructive"
+              role="alert"
+            >
+              {submitError}
+            </p>
+          ) : null}
 
           <Button
             type="submit"

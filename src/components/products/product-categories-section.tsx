@@ -1,6 +1,6 @@
 import { productCategories, type ProductCategory } from "@/data/products";
 import { cn } from "@/lib/utils";
-import { Container, Card, CardHeader, CardTitle, CardDescription } from "@/components/ui";
+import { Card, Container } from "@/components/ui";
 import { BrainCircuit, CloudCog, Database, Layers, Terminal } from "lucide-react";
 
 export type ProductCategoriesSectionProps = {
@@ -41,27 +41,27 @@ export function ProductCategoriesSection({
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="mt-12 grid gap-4">
           {categories.map((category) => {
             const Icon = categoryIcons[category.name] || Layers;
             return (
               <Card
                 key={category.name}
-                className="group relative overflow-hidden rounded-2xl border border-border/80 bg-background/50 p-6 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-background hover:shadow-md"
+                className="group relative overflow-hidden rounded-2xl border border-border/80 bg-background/50 p-5 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-background hover:shadow-md sm:p-6"
               >
-                <CardHeader className="p-0 gap-4">
-                  <div className="flex size-10 items-center justify-center rounded-xl bg-surface-muted text-premium transition duration-200 group-hover:bg-premium-muted">
+                <div className="grid gap-4 sm:grid-cols-[3rem_1fr] sm:items-start">
+                  <div className="flex size-12 items-center justify-center rounded-xl bg-surface-muted text-premium transition duration-200 group-hover:bg-premium-muted">
                     <Icon aria-hidden="true" className="size-5" />
                   </div>
-                  <div className="space-y-2">
-                    <CardTitle className="text-base font-bold text-foreground tracking-tight">
+                  <div className="grid gap-2 lg:grid-cols-[18rem_1fr] lg:items-start lg:gap-8">
+                    <h3 className="text-base font-bold tracking-tight text-foreground sm:text-lg">
                       {category.name}
-                    </CardTitle>
-                    <CardDescription className="text-sm text-muted-foreground leading-6">
+                    </h3>
+                    <p className="text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
                       {category.description}
-                    </CardDescription>
+                    </p>
                   </div>
-                </CardHeader>
+                </div>
               </Card>
             );
           })}

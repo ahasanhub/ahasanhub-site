@@ -14,8 +14,18 @@ export type ServiceDetailSection = {
   id: string;
   title: string;
   description: string;
+  deliveryScope: {
+    label: string;
+    value: string;
+  }[];
+  expectedOutcomes: string[];
   keyFeatures: string[];
   businessValue: string;
+  valueFlow: {
+    trigger: string;
+    delivery: string;
+    outcome: string;
+  };
 };
 
 export type WorkProcessStep = {
@@ -166,63 +176,231 @@ export const serviceDetailSections: ServiceDetailSection[] = [
     title: "AI Systems",
     description:
       "Design and build applied AI capabilities that connect models, business rules, data, and human workflows into dependable operating systems.",
+    deliveryScope: [
+      {
+        label: "Model layer",
+        value: "LLM orchestration, prompts, retrieval, and guardrails.",
+      },
+      {
+        label: "Workflow layer",
+        value: "Human approvals, automation triggers, and operational handoffs.",
+      },
+      {
+        label: "Governance",
+        value: "Usage boundaries, monitoring, and practical rollout controls.",
+      },
+    ],
+    expectedOutcomes: [
+      "AI features connected to real workflows",
+      "Reduced manual review and repeat work",
+      "Clear path from prototype to production use",
+    ],
     keyFeatures: ["Automation", "Predictive systems", "Workflows"],
     businessValue:
       "Reduces manual effort, improves decision speed, and turns AI initiatives into practical business capability instead of isolated experiments.",
+    valueFlow: {
+      trigger: "Manual work slows decisions",
+      delivery: "AI workflows connect rules, data, and users",
+      outcome: "Faster decisions with governed execution",
+    },
   },
   {
     id: "erp",
     title: "ERP",
     description:
       "Shape ERP architecture, integrations, and process flows around real operating needs across finance, inventory, sales, projects, and service teams.",
+    deliveryScope: [
+      {
+        label: "Process mapping",
+        value: "Finance, sales, inventory, projects, and service flows.",
+      },
+      {
+        label: "Platform design",
+        value: "Business Central/NAV architecture and extension strategy.",
+      },
+      {
+        label: "Integration",
+        value: "APIs, data boundaries, automation, and system handoffs.",
+      },
+    ],
+    expectedOutcomes: [
+      "Cleaner ERP operating model",
+      "Reliable integrations across core systems",
+      "Better visibility for business teams",
+    ],
     keyFeatures: ["Integration", "Enterprise workflows", "Optimization"],
     businessValue:
       "Improves operational visibility, removes disconnected processes, and creates a cleaner foundation for scalable enterprise execution.",
+    valueFlow: {
+      trigger: "Disconnected operations limit visibility",
+      delivery: "ERP architecture aligns process and integration",
+      outcome: "Cleaner execution across enterprise teams",
+    },
   },
   {
     id: "cloud",
     title: "Cloud",
     description:
       "Create secure cloud foundations with infrastructure patterns, delivery automation, monitoring, and DevOps practices built for production growth.",
+    deliveryScope: [
+      {
+        label: "Foundation",
+        value: "Cloud environments, networking, security, and access controls.",
+      },
+      {
+        label: "Delivery",
+        value: "CI/CD pipelines, release workflows, and deployment standards.",
+      },
+      {
+        label: "Reliability",
+        value: "Observability, alerts, backup posture, and runtime confidence.",
+      },
+    ],
+    expectedOutcomes: [
+      "More predictable release cycles",
+      "Production-ready infrastructure baseline",
+      "Improved monitoring and operational control",
+    ],
     keyFeatures: ["Scaling", "Infrastructure", "DevOps pipelines"],
     businessValue:
       "Increases platform reliability, shortens release cycles, and gives teams the infrastructure confidence to scale without avoidable complexity.",
+    valueFlow: {
+      trigger: "Fragile infrastructure slows releases",
+      delivery: "Cloud foundations automate delivery and monitoring",
+      outcome: "Reliable scaling with shorter release cycles",
+    },
   },
   {
     id: "saas-platforms",
     title: "SaaS Platforms",
     description:
       "Build product-ready SaaS foundations with tenant-aware architecture, account models, subscription paths, and reusable platform capabilities.",
+    deliveryScope: [
+      {
+        label: "Product core",
+        value: "Tenant model, account structure, roles, and feature boundaries.",
+      },
+      {
+        label: "Platform systems",
+        value: "Billing readiness, onboarding flows, APIs, and admin surfaces.",
+      },
+      {
+        label: "Scale path",
+        value: "Reusable modules, data separation, and maintainable release flow.",
+      },
+    ],
+    expectedOutcomes: [
+      "SaaS foundation ready for real users",
+      "Architecture that supports pricing and growth",
+      "Reusable platform capabilities for future modules",
+    ],
     keyFeatures: ["Tenant models", "Product foundations", "Delivery systems"],
     businessValue:
       "Accelerates product delivery while keeping the platform maintainable as users, pricing models, and operational demands grow.",
+    valueFlow: {
+      trigger: "Product growth adds platform pressure",
+      delivery: "Reusable SaaS foundations support tenants and plans",
+      outcome: "Faster releases without structural rework",
+    },
   },
   {
     id: "full-stack-applications",
     title: "Full-Stack Applications",
     description:
       "Deliver polished web applications, APIs, integration layers, and frontend experiences with maintainable engineering standards.",
+    deliveryScope: [
+      {
+        label: "Frontend",
+        value: "Responsive interfaces, reusable components, and user workflows.",
+      },
+      {
+        label: "Backend",
+        value: "APIs, business logic, data access, and integration services.",
+      },
+      {
+        label: "Quality",
+        value: "Type safety, validation, accessibility, and deployment readiness.",
+      },
+    ],
+    expectedOutcomes: [
+      "Maintainable application architecture",
+      "Polished user experience across devices",
+      "APIs and integrations ready for extension",
+    ],
     keyFeatures: ["Web apps", "APIs", "User experience"],
     businessValue:
       "Turns business requirements into reliable software that users can adopt quickly and teams can extend without constant rework.",
+    valueFlow: {
+      trigger: "Requirements need reliable product execution",
+      delivery: "Applications, APIs, and UX ship as one system",
+      outcome: "Adoptable software teams can keep extending",
+    },
   },
   {
     id: "software-architecture",
     title: "Software Architecture",
     description:
       "Provide architecture reviews, system design, platform direction, and technical roadmap decisions for complex software initiatives.",
+    deliveryScope: [
+      {
+        label: "Assessment",
+        value: "Current-state review, constraints, risks, and delivery blockers.",
+      },
+      {
+        label: "Design",
+        value: "System boundaries, integration patterns, and technical tradeoffs.",
+      },
+      {
+        label: "Roadmap",
+        value: "Sequenced recommendations that teams can execute without churn.",
+      },
+    ],
+    expectedOutcomes: [
+      "Clear architectural decision record",
+      "Lower technical and delivery risk",
+      "Roadmap aligned with business priorities",
+    ],
     keyFeatures: ["System design", "Architecture reviews", "Technical roadmaps"],
     businessValue:
       "Clarifies tradeoffs early, reduces delivery risk, and helps teams make decisions that remain sound beyond the first release.",
+    valueFlow: {
+      trigger: "Technical choices carry long-term risk",
+      delivery: "Architecture review clarifies tradeoffs and direction",
+      outcome: "Decisions hold up beyond the first release",
+    },
   },
   {
     id: "digital-transformation",
     title: "Digital Transformation",
     description:
       "Connect modernization goals with operating models, platform choices, data flows, and execution priorities that teams can actually deliver.",
+    deliveryScope: [
+      {
+        label: "Strategy",
+        value: "Business goals, operating model, capability gaps, and priorities.",
+      },
+      {
+        label: "Modernization",
+        value: "Platform choices, process redesign, data flows, and adoption path.",
+      },
+      {
+        label: "Execution",
+        value: "Phased roadmap, ownership model, risks, and success measures.",
+      },
+    ],
+    expectedOutcomes: [
+      "Technology roadmap tied to business value",
+      "Practical execution plan for leadership",
+      "Better alignment across teams and systems",
+    ],
     keyFeatures: ["Modernization", "Operating models", "Execution planning"],
     businessValue:
       "Aligns technology investment with measurable business change and gives leadership a practical roadmap from strategy to adoption.",
+    valueFlow: {
+      trigger: "Strategy needs an executable operating path",
+      delivery: "Modernization roadmap connects platforms and teams",
+      outcome: "Technology investment maps to business change",
+    },
   },
 ];
 

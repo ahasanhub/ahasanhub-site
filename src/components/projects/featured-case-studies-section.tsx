@@ -38,7 +38,7 @@ export function FeaturedCaseStudiesSection({
       )}
     >
       <div className="mx-auto w-full max-w-7xl px-page-x sm:px-page-x-sm lg:px-page-x-lg">
-        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-12">
+        <div className="grid gap-10">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-wide text-architecture">
               Featured case studies
