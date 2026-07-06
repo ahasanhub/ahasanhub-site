@@ -81,7 +81,7 @@ export function AboutFounderSection({ className }: AboutFounderSectionProps) {
           </div>
 
           <div className="order-1 lg:order-2">
-            <FounderImageCard className="mx-auto max-w-md lg:mr-0" />
+            <FounderImageCard className="lg:mr-0" />
           </div>
         </div>
       </Container>

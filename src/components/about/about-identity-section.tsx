@@ -1,6 +1,12 @@
 import { ShieldCheck } from "lucide-react";
 import { Badge, Card, Container } from "@/components/ui";
 
+const identityPoints = [
+  "We connect business strategy with practical engineering decisions.",
+  "We design AI, ERP, cloud, and SaaS systems around real operational needs.",
+  "We help teams move from unclear technology ideas to scalable delivery plans.",
+];
+
 export function AboutIdentitySection() {
   return (
     <section
@@ -18,9 +24,10 @@ export function AboutIdentitySection() {
               Who We Are
             </h2>
             <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-              AhasanHub is a modern consulting-focused technology brand
-              specializing in system design, enterprise architecture, and
-              scalable software engineering.
+              AhasanHub is a premium enterprise technology consulting platform
+              for organizations that need stronger systems, clearer technical
+              direction, and practical execution across AI, ERP, cloud, SaaS,
+              and modern software architecture.
             </p>
           </div>
 
@@ -29,13 +36,28 @@ export function AboutIdentitySection() {
               <ShieldCheck aria-hidden="true" className="size-5" />
             </div>
             <h3 className="mt-5 text-xl font-semibold tracking-tight text-foreground">
-              Trusted enterprise thinking
+              Consulting built around business outcomes
             </h3>
             <p className="mt-3 text-sm leading-6 text-muted-foreground">
-              The brand is built for organizations that need clear technical
-              direction, reliable architecture decisions, and delivery practices
-              that support long-term growth.
+              The work is shaped for leaders and teams who need systems that
+              are maintainable, scalable, automation-ready, and aligned with
+              measurable operational value.
             </p>
+
+            <ul className="mt-6 space-y-3">
+              {identityPoints.map((point) => (
+                <li
+                  key={point}
+                  className="flex gap-3 text-sm font-medium leading-6 text-foreground"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 size-1.5 shrink-0 rounded-full bg-architecture"
+                  />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
           </Card>
         </div>
       </Container>
