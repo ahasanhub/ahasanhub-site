@@ -221,3 +221,6 @@ This project is proprietary unless otherwise specified.
 **Connect • Create • Grow**
 
 Building intelligent digital systems for modern businesses.
+## Domain 
+Move domain Hostinger to Vercel
+https://www.youtube.com/watch?v=gu3SJB6hXyk
