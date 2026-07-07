@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import type { ReactNode } from "react";
 import { CookieConsent } from "@/components/cookie-consent/CookieConsent";
 import { Footer, Navbar } from "@/components/layout";
@@ -42,6 +43,18 @@ export default function RootLayout({
         className="min-h-full bg-background text-foreground"
         suppressHydrationWarning
       >
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RF0X10HP2N"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RF0X10HP2N');
+          `}
+        </Script>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-xl focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-foreground focus:shadow-sm focus:outline-2 focus:outline-offset-2 focus:outline-ring"
