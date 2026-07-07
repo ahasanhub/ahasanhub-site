@@ -13,7 +13,11 @@ export type SiteProfile = {
 export const site: SiteProfile = {
   name: "AhasanHub",
   tagline: "Connect. Create. Grow.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ahasanhub.com",
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL &&
+    process.env.NEXT_PUBLIC_SITE_URL.includes("localhost")
+      ? process.env.NEXT_PUBLIC_SITE_URL
+      : "https://ahasanhub.com",
   logoPath: "/ahasanhub-logo.png",
   description:
     "AhasanHub is a premium enterprise technology consulting platform for AI, ERP, cloud, SaaS, and software architecture.",
