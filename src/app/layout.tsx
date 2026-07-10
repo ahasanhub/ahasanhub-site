@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import type { ReactNode } from "react";
-import { ChatWidget } from "@/components/chatbot/ChatWidget";
+// import { ChatWidget } from "@/components/chatbot/ChatWidget";
 import { CookieConsent } from "@/components/cookie-consent/CookieConsent";
 import { Footer, Navbar } from "@/components/layout";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -71,7 +71,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <CookieConsent />
-          <ChatWidget />
+          {/* <ChatWidget /> */}
         </ThemeProvider>
       </body>
     </html>
