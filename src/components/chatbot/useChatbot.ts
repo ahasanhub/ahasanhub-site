@@ -11,16 +11,19 @@ export function useChatbot() {
 
   // Load chat history from localStorage on client-side mount
   useEffect(() => {
-    setIsMounted(true);
-    const saved = localStorage.getItem("ahasanhub_chat_history");
-    if (saved) {
-      try {
-        setMessages(JSON.parse(saved));
-      } catch (e) {
-        console.error("Failed to parse saved chat history:", e);
-        localStorage.removeItem("ahasanhub_chat_history");
+    const timer = setTimeout(() => {
+      setIsMounted(true);
+      const saved = localStorage.getItem("ahasanhub_chat_history");
+      if (saved) {
+        try {
+          setMessages(JSON.parse(saved));
+        } catch (e) {
+          console.error("Failed to parse saved chat history:", e);
+          localStorage.removeItem("ahasanhub_chat_history");
+        }
       }
-    }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   /**
@@ -97,10 +100,11 @@ export function useChatbot() {
       } else {
         throw new Error(data.error || "Invalid response structure from assistant.");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Chatbot Hook Send Error:", err);
+      const errorObj = err as Error;
       setError(
-        err.message || "Failed to connect to the assistant. Please try again."
+        (errorObj && typeof errorObj === "object" && "message" in errorObj && typeof errorObj.message === "string" ? errorObj.message : null) || "Failed to connect to the assistant. Please try again."
       );
     } finally {
       setIsLoading(false);

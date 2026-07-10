@@ -99,10 +99,11 @@ export function LeadCaptureForm({ onClose, onSuccess }: LeadCaptureFormProps) {
       setTimeout(() => {
         onSuccess();
       }, 2000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Lead Form Submission Error:", err);
+      const errorObj = err as Error;
       setSubmitError(
-        err.message || "Failed to submit your details. Please try again later."
+        (errorObj && typeof errorObj === "object" && "message" in errorObj && typeof errorObj.message === "string" ? errorObj.message : null) || "Failed to submit your details. Please try again later."
       );
     } finally {
       setIsLoading(false);

@@ -1,12 +1,10 @@
-import { ChatMessage } from "@/types/chatbot";
-
 export class GeminiService {
   private apiKey: string;
   private defaultModel: string;
 
   constructor() {
     this.apiKey = process.env.GEMINI_API_KEY || "";
-    this.defaultModel = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+    this.defaultModel = process.env.GEMINI_MODEL || "gemma-4-31b-it";
   }
 
   /**
@@ -44,11 +42,11 @@ export class GeminiService {
       },
     };
 
-    // Timeout implementation using AbortController (15 seconds)
+    // Timeout implementation using AbortController (60 seconds)
     const controller = new AbortController();
     const timeoutId = setTimeout(() => {
       controller.abort();
-    }, 15000);
+    }, 60000);
 
     try {
       const response = await fetch(url, {
@@ -69,7 +67,16 @@ export class GeminiService {
       }
 
       const data = await response.json();
-      const content = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      const parts = data.candidates?.[0]?.content?.parts;
+      
+      let content: string | undefined = undefined;
+      if (Array.isArray(parts)) {
+        // Find the first part that is not a reasoning/thought block
+        const textPart = (parts as { text?: string; thought?: boolean }[]).find(
+          (p) => p && typeof p === "object" && !p.thought
+        );
+        content = textPart?.text;
+      }
 
       if (content === undefined || content === null) {
         console.error("Gemini API response parsing error: empty content in candidates.", data);
@@ -77,9 +84,10 @@ export class GeminiService {
       }
 
       return content;
-    } catch (error: any) {
+    } catch (error: unknown) {
       clearTimeout(timeoutId);
-      if (error.name === "AbortError") {
+      const err = error as Error;
+      if (err && typeof err === "object" && "name" in err && err.name === "AbortError") {
         console.error("Gemini API call timed out after 15 seconds.");
         throw new Error("AI service request timed out. Please try again.");
       }
