@@ -1,8 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import {
   Activity,
   Bot,
   BrainCircuit,
   CheckCircle2,
+  ChevronDown,
   Cpu,
   Database,
   GitBranch,
@@ -15,6 +19,7 @@ import { cn } from "@/lib/utils";
 type IntelligenceItem = {
   title: string;
   description: string;
+  details: string;
   icon: typeof Bot;
 };
 
@@ -38,16 +43,22 @@ const intelligenceLayers: IntelligenceLayer[] = [
       {
         title: "AI Integration Engine",
         description: "Embedding LLMs into business workflows",
+        details:
+          "Enterprise-grade LLM orchestration with retrieval-augmented generation, prompt engineering pipelines, and secure model deployment across cloud and on-premise infrastructure.",
         icon: BrainCircuit,
       },
       {
         title: "Agentic AI Systems",
         description: "Autonomous decision & task execution",
+        details:
+          "Multi-agent frameworks that decompose complex business tasks into autonomous actions — with human-in-the-loop governance, tool-calling capabilities, and real-time feedback loops.",
         icon: Bot,
       },
       {
         title: "Workflow Intelligence Layer",
         description: "Process automation & orchestration",
+        details:
+          "End-to-end intelligent process automation combining RPA, event-driven architecture, and AI-powered decision nodes to eliminate manual bottlenecks across operations.",
         icon: Workflow,
       },
     ],
@@ -59,16 +70,22 @@ const intelligenceLayers: IntelligenceLayer[] = [
       {
         title: "Legacy System Modernization",
         description: "Upgrade and refactor enterprise systems",
+        details:
+          "Strangler-pattern migrations from monolithic architectures to cloud-native microservices — preserving business logic continuity while unlocking modern scalability.",
         icon: Cpu,
       },
       {
         title: "ERP Integration Layer",
         description: "Dynamics 365 Business Central / NAV",
+        details:
+          "Deep integration with Microsoft Dynamics 365 Business Central, including custom extensions (AL), Power Automate flows, Dataverse connectors, and migration from legacy NAV systems.",
         icon: Database,
       },
       {
         title: "API & Microservices Layer",
         description: "System-to-system connectivity",
+        details:
+          "RESTful and event-driven API design with gateway management, contract-first development, rate limiting, and comprehensive observability across distributed services.",
         icon: Network,
       },
     ],
@@ -80,16 +97,22 @@ const intelligenceLayers: IntelligenceLayer[] = [
       {
         title: "Data Processing Engine",
         description: "Clean pipelines for operational signals",
+        details:
+          "Scalable ETL/ELT pipelines with data quality validation, schema evolution, and automated lineage tracking — from raw ingestion to analytics-ready datasets.",
         icon: GitBranch,
       },
       {
         title: "BI & Dashboard Systems",
         description: "Executive visibility across systems",
+        details:
+          "Custom Power BI and analytics dashboards providing real-time KPI tracking, drill-down reporting, and embedded insights for stakeholders at every organizational level.",
         icon: Layers3,
       },
       {
         title: "Real-time Business Intelligence",
         description: "Decision-ready enterprise telemetry",
+        details:
+          "Streaming analytics with anomaly detection, predictive forecasting, and alerting — transforming operational data into actionable intelligence within seconds.",
         icon: Activity,
       },
     ],
@@ -118,6 +141,59 @@ const statusRows: StatusRow[] = [
     accent: "bg-premium",
   },
 ];
+
+function CollapsibleItem({ item }: { item: IntelligenceItem }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const Icon = item.icon;
+
+  return (
+    <div className="rounded-lg border border-border/70 bg-background/60 transition-colors duration-200 hover:border-border">
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="flex w-full items-start gap-3 p-3 text-left"
+        aria-expanded={isOpen}
+      >
+        <span
+          aria-hidden="true"
+          className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted text-architecture"
+        >
+          <Icon className="size-4" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-semibold text-foreground">
+            {item.title}
+          </p>
+          <p className="mt-0.5 text-xs leading-5 text-muted-foreground">
+            {item.description}
+          </p>
+        </div>
+        <ChevronDown
+          aria-hidden="true"
+          className={cn(
+            "mt-1 size-4 shrink-0 text-muted-foreground transition-transform duration-300 ease-out",
+            isOpen && "rotate-180",
+          )}
+        />
+      </button>
+
+      <div
+        className={cn(
+          "grid transition-[grid-template-rows] duration-300 ease-out",
+          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+        )}
+      >
+        <div className="overflow-hidden">
+          <div className="border-t border-border/60 px-3 pb-3 pt-2.5">
+            <p className="text-xs leading-5 text-muted-foreground/90">
+              {item.details}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function HeroVisualCard() {
   return (
@@ -166,31 +242,9 @@ export function HeroVisualCard() {
                   </h2>
                 </div>
                 <div className="grid gap-2.5">
-                  {layer.items.map((item) => {
-                    const Icon = item.icon;
-
-                    return (
-                      <div
-                        key={item.title}
-                        className="flex items-start gap-3 rounded-lg border border-border/70 bg-background/60 p-3"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-lg bg-muted text-architecture"
-                        >
-                          <Icon className="size-4" />
-                        </span>
-                        <div className="min-w-0">
-                          <p className="text-sm font-semibold text-foreground">
-                            {item.title}
-                          </p>
-                          <p className="mt-0.5 text-xs leading-5 text-muted-foreground">
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
+                  {layer.items.map((item) => (
+                    <CollapsibleItem key={item.title} item={item} />
+                  ))}
                 </div>
               </section>
             ))}
