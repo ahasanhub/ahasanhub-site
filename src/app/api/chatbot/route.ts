@@ -1,18 +1,18 @@
 import { NextResponse } from "next/server";
 import { geminiService } from "@/services/ai/gemini.service";
 import { site } from "@/data/site";
-import { services } from "@/data/services";
-import { featuredProducts } from "@/data/products";
+// import { services } from "@/data/services";
+// import { featuredProducts } from "@/data/products";
 import { ChatRequestBody } from "@/types/chatbot";
 
-// Compile data contexts dynamically so the AI is always up to date
-const serviceContext = services
-  .map((s) => `- **${s.title}**: ${s.summary} (Focus: ${s.focusAreas.join(", ")})`)
-  .join("\n");
+// Compile data contexts dynamically so the AI is always up to date (commented out to satisfy ESLint until integrated into prompt)
+// const serviceContext = services
+//   .map((s) => `- **${s.title}**: ${s.summary} (Focus: ${s.focusAreas.join(", ")})`)
+//   .join("\n");
 
-const productContext = featuredProducts
-  .map((p) => `- **${p.name}** (${p.category}): ${p.description} (Tech Stack: ${p.techStack.join(", ")})`)
-  .join("\n");
+// const productContext = featuredProducts
+//   .map((p) => `- **${p.name}** (${p.category}): ${p.description} (Tech Stack: ${p.techStack.join(", ")})`)
+//   .join("\n");
 
 const SYSTEM_PROMPT = `You are the official AI Consulting Assistant representing AhasanHub.
 Your goal is to assist visitors, prospective clients, and partners by explaining our technology consulting services, answering technical business questions, helping them understand potential architectural solutions, asking insightful discovery questions, and encouraging them to book a consultation.
@@ -103,18 +103,20 @@ export async function POST(request: Request) {
       message: cleanReply,
       suggestions: suggestions.slice(0, 3), // Ensure maximum 3 suggestions
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Chatbot API Route Error:", error);
+    const err = error as Error;
 
-    if (error.message === "API_KEY_MISSING") {
+    if (err && typeof err === "object" && "message" in err && err.message === "API_KEY_MISSING") {
       return NextResponse.json(
         { success: false, error: "The AI Chatbot is temporarily offline due to missing server configurations." },
         { status: 503 }
       );
     }
 
+    const errorMessage = err && typeof err === "object" && "message" in err && typeof err.message === "string" ? err.message : "An unexpected error occurred. Please try sending your message again.";
     return NextResponse.json(
-      { success: false, error: error.message || "An unexpected error occurred. Please try sending your message again." },
+      { success: false, error: errorMessage },
       { status: 500 }
     );
   }

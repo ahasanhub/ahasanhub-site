@@ -158,7 +158,7 @@ export function ChatWindow({
                     Consulting Assistant
                   </h3>
                   <p className="text-xs text-muted-foreground max-w-[280px] leading-relaxed">
-                    Hello! I can answer questions about AhasanHub's enterprise AI systems, ERP architecture, cloud solutions, and software engineering services.
+                    {"Hello! I can answer questions about AhasanHub's enterprise AI systems, ERP architecture, cloud solutions, and software engineering services."}
                   </p>
                   <button
                     type="button"
