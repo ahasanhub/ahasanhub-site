@@ -3,6 +3,7 @@ export interface ChatMessage {
   role: "user" | "assistant" | "system";
   content: string;
   createdAt: string; // ISO date string
+  suggestions?: string[]; // Dynamic follow-up suggested questions
 }
 
 export interface ChatSessionState {
@@ -22,5 +23,6 @@ export interface ChatRequestBody {
 export interface ChatResponseBody {
   success: boolean;
   message?: string;
+  suggestions?: string[];
   error?: string;
 }

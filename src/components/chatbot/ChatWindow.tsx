@@ -6,6 +6,12 @@ import { ChatInput } from "./ChatInput";
 import { LeadCaptureForm } from "./LeadCaptureForm";
 import { cn } from "@/lib/utils";
 
+const SUGGESTED_QUESTIONS = [
+  { label: "AI Integration & Agent Solutions", query: "Can you explain AhasanHub's AI integration and AI agent solutions?" },
+  { label: "ERP & Dynamics 365 Modernization", query: "How does AhasanHub help with legacy system modernization and Dynamics 365 / ERP consulting?" },
+  { label: "Cloud, DevOps & Data Analytics", query: "What kind of Cloud/DevOps architecture and Data Analytics services do you provide?" },
+];
+
 interface ChatWindowProps {
   isOpen: boolean;
   onClose: () => void;
@@ -28,6 +34,13 @@ export function ChatWindow({
   const [showLeadForm, setShowLeadForm] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const windowRef = useRef<HTMLDivElement>(null);
+
+  const lastMessage = messages[messages.length - 1];
+  const hasSuggestions = 
+    lastMessage && 
+    lastMessage.role === "assistant" && 
+    lastMessage.suggestions && 
+    lastMessage.suggestions.length > 0;
 
   // Auto-scroll to bottom of conversation
   const scrollToBottom = () => {
@@ -136,29 +149,73 @@ export function ChatWindow({
           {/* Messages List Area */}
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-background/50">
             {messages.length === 0 ? (
-              <div className="flex h-full flex-col items-center justify-center text-center p-6 space-y-3">
-                <div className="flex size-12 items-center justify-center rounded-2xl bg-surface border border-border shadow-sm text-primary mb-1">
-                  <Bot className="size-6" />
+              <div className="flex h-full flex-col items-center justify-center text-center p-5 space-y-4">
+                <div className="flex flex-col items-center space-y-2">
+                  <div className="flex size-12 items-center justify-center rounded-2xl bg-surface border border-border shadow-sm text-primary mb-1">
+                    <Bot className="size-6" />
+                  </div>
+                  <h3 className="text-sm font-semibold text-foreground">
+                    Consulting Assistant
+                  </h3>
+                  <p className="text-xs text-muted-foreground max-w-[280px] leading-relaxed">
+                    Hello! I can answer questions about AhasanHub's enterprise AI systems, ERP architecture, cloud solutions, and software engineering services.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setShowLeadForm(true)}
+                    className="text-xs font-semibold text-primary hover:underline hover:text-primary/90 flex items-center gap-1 cursor-pointer"
+                  >
+                    <Sparkles className="size-3 text-premium fill-premium/10 shrink-0" />
+                    Request expert consultation
+                  </button>
                 </div>
-                <h3 className="text-sm font-semibold text-foreground">
-                  Consulting Assistant
-                </h3>
-                <p className="text-xs text-muted-foreground max-w-[280px] leading-relaxed">
-                  Hello! I can answer questions about AhasanHub's enterprise AI systems, ERP architecture, cloud solutions, and software engineering services.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setShowLeadForm(true)}
-                  className="mt-2 text-xs font-semibold text-primary hover:underline hover:text-primary/90 flex items-center gap-1 cursor-pointer"
-                >
-                  <Sparkles className="size-3 text-premium fill-premium/10 shrink-0" />
-                  Request expert consultation
-                </button>
+
+                <div className="w-full max-w-[320px] pt-2 space-y-2 border-t border-border/60">
+                  <p className="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground text-left px-1 mb-1">
+                    Suggested Inquiries
+                  </p>
+                  <div className="space-y-1.5">
+                    {SUGGESTED_QUESTIONS.map((s, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => onSendMessage(s.query)}
+                        className="w-full text-left px-3 py-2 text-xs rounded-xl border border-border bg-surface hover:bg-surface-muted hover:border-primary/30 transition-all text-foreground font-medium flex items-start gap-2 shadow-xs cursor-pointer leading-normal"
+                      >
+                        <Sparkles className="size-3.5 text-premium shrink-0 mt-0.5" />
+                        <span>{s.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
+
             ) : (
               messages.map((message) => (
                 <ChatMessage key={message.id} message={message} />
               ))
+            )}
+
+            {/* Dynamic suggested questions from the latest assistant response */}
+            {hasSuggestions && !isLoading && (
+              <div className="flex flex-col gap-1.5 py-1.5 pl-11 pr-4 animate-in fade-in duration-200">
+                <p className="text-[9px] font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">
+                  Suggested Follow-ups
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {lastMessage.suggestions!.map((suggestion, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => onSendMessage(suggestion)}
+                      className="text-left px-3 py-1.5 text-xs rounded-xl border border-border bg-surface hover:bg-surface-muted hover:border-primary/30 transition-all text-foreground font-medium flex items-center gap-1.5 shadow-xs cursor-pointer leading-normal"
+                    >
+                      <Sparkles className="size-3 text-premium shrink-0" />
+                      <span>{suggestion}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
 
             {/* Typing indicator */}

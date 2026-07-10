@@ -88,6 +88,7 @@ export function useChatbot() {
           role: "assistant",
           content: data.message,
           createdAt: new Date().toISOString(),
+          suggestions: data.suggestions,
         };
 
         const finalMessages = [...updatedMessages, assistantMessage];
