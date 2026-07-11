@@ -32,6 +32,14 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
+            <Link
+              href="https://ahasanhub-admin.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-primary px-3.5 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            >
+              Login
+            </Link>
             <MobileNavigationMenu />
           </div>
         </div>
