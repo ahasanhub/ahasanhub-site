@@ -14,11 +14,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/insights",
     "/products",
     "/contact",
+    "/privacy",
+    "/terms",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: route === "" ? ("daily" as const) : ("monthly" as const),
-    priority: route === "" ? 1.0 : route === "/contact" ? 0.5 : 0.8,
+    priority:
+      route === ""
+        ? 1.0
+        : route === "/privacy" || route === "/terms"
+          ? 0.3
+          : route === "/contact"
+            ? 0.5
+            : 0.8,
   }));
 
   // Dynamic insights routes

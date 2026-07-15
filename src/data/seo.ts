@@ -47,4 +47,16 @@ export const pageSeo: Record<string, PageSeo> = {
     description:
       "Contact AhasanHub for enterprise technology consulting, AI initiatives, ERP architecture, cloud systems, and software delivery partnerships.",
   },
+  privacy: {
+    path: "/privacy",
+    title: "Privacy Policy",
+    description:
+      "Review AhasanHub's Privacy Policy, cookie details, and data protection practices.",
+  },
+  terms: {
+    path: "/terms",
+    title: "Terms of Service",
+    description:
+      "Review AhasanHub's Terms of Service, user agreements, and engineering consultation rules.",
+  },
 };
