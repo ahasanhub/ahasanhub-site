@@ -9,7 +9,7 @@ import {
   getInsightBySlug,
   getRelatedInsights,
 } from "@/lib/mdx";
-import { createInsightSeoMetadata } from "@/lib/seo";
+import { createInsightSeoMetadata, siteConfig } from "@/lib/seo";
 import { InsightMdxContent } from "./insight-mdx-content";
 
 type InsightPageProps = {
@@ -56,9 +56,71 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
   }
 
   const relatedInsights = getRelatedInsights(insight);
+  const articleUrl = new URL(`/insights/${insight.slug}`, siteConfig.url);
+  const articleImage = new URL(
+    insight.image ?? siteConfig.logoPath,
+    siteConfig.url,
+  );
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: insight.title,
+    description: insight.description,
+    image: articleImage.toString(),
+    datePublished: insight.date,
+    dateModified: insight.updatedDate ?? insight.date,
+    inLanguage: "en",
+    articleSection: insight.category,
+    keywords: insight.tags.join(", "),
+    mainEntityOfPage: articleUrl.toString(),
+    author: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: new URL(siteConfig.logoPath, siteConfig.url).toString(),
+      },
+    },
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Insights",
+        item: new URL("/insights", siteConfig.url).toString(),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: insight.title,
+        item: articleUrl.toString(),
+      },
+    ],
+  };
 
   return (
     <article className="py-section-y sm:py-section-y-sm lg:py-section-y-lg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <Container size="md">
         <header className="border-b border-border pb-8">
           <div className="flex flex-wrap items-center gap-3">
@@ -67,8 +129,16 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
               dateTime={insight.date}
               className="text-sm font-medium text-muted-foreground"
             >
-              {formatInsightDate(insight.date)}
+              Published {formatInsightDate(insight.date)}
             </time>
+            {insight.updatedDate && insight.updatedDate !== insight.date ? (
+              <time
+                dateTime={insight.updatedDate}
+                className="text-sm font-medium text-muted-foreground"
+              >
+                Updated {formatInsightDate(insight.updatedDate)}
+              </time>
+            ) : null}
           </div>
 
           <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">

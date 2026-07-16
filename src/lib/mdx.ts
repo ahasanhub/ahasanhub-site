@@ -38,6 +38,7 @@ function parseInsightFrontmatter(
     title,
     description,
     date,
+    updatedDate,
     category,
     tags,
     slug,
@@ -51,6 +52,7 @@ function parseInsightFrontmatter(
     typeof title !== "string" ||
     typeof description !== "string" ||
     typeof date !== "string" ||
+    (updatedDate !== undefined && typeof updatedDate !== "string") ||
     typeof category !== "string" ||
     !isStringArray(tags) ||
     typeof slug !== "string" ||
@@ -66,6 +68,7 @@ function parseInsightFrontmatter(
     title,
     description,
     date,
+    updatedDate,
     category,
     tags,
     slug,

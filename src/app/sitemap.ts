@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const insights = getAllInsights();
     dynamicRoutes = insights.map((insight) => ({
       url: `${baseUrl}/insights/${insight.slug}`,
-      lastModified: new Date(insight.date),
+      lastModified: new Date(insight.updatedDate ?? insight.date),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     }));

@@ -65,6 +65,7 @@ export function createInsightSeoMetadata(
   return {
     title: insight.title,
     description,
+    keywords: insight.tags,
     alternates: {
       canonical: url,
     },
@@ -84,6 +85,7 @@ export function createInsightSeoMetadata(
       locale: siteConfig.locale,
       type: "article",
       publishedTime: `${insight.date}T00:00:00.000Z`,
+      modifiedTime: `${insight.updatedDate ?? insight.date}T00:00:00.000Z`,
       authors: [siteConfig.name],
       tags: insight.tags,
     },

@@ -2,6 +2,7 @@ export type InsightFrontmatter = {
   title: string;
   description: string;
   date: string;
+  updatedDate?: string;
   category: string;
   tags: string[];
   slug: string;

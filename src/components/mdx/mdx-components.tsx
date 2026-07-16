@@ -20,6 +20,15 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  h3: ({ className, ...props }: ComponentPropsWithoutRef<"h3">) => (
+    <h3
+      className={cn(
+        "mt-8 text-xl font-semibold leading-tight tracking-tight text-foreground",
+        className,
+      )}
+      {...props}
+    />
+  ),
   p: ({ className, ...props }: ComponentPropsWithoutRef<"p">) => (
     <p
       className={cn("my-5 leading-8 text-muted-foreground", className)}
@@ -46,6 +55,15 @@ export const mdxComponents = {
   ),
   li: ({ className, ...props }: ComponentPropsWithoutRef<"li">) => (
     <li className={cn("pl-1 leading-7", className)} {...props} />
+  ),
+  a: ({ className, ...props }: ComponentPropsWithoutRef<"a">) => (
+    <a
+      className={cn(
+        "font-medium text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary/80",
+        className,
+      )}
+      {...props}
+    />
   ),
   pre: ({ className, ...props }: ComponentPropsWithoutRef<"pre">) => (
     <pre
