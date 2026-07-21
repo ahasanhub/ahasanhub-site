@@ -1,0 +1,90 @@
+name: Supabase Database Keep Alive
+
+on:
+  schedule:
+    # Every day at 02:17 UTC
+    # Bangladesh time: 08:17 AM
+    - cron: "17 2 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-database-keep-alive
+  cancel-in-progress: false
+
+jobs:
+  keep-alive:
+    name: Connect to Supabase PostgreSQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    env:
+      PGHOST: ${{ secrets.SUPABASE_DB_HOST }}
+      PGPORT: "6543"
+      PGDATABASE: "postgres"
+      PGUSER: ${{ secrets.SUPABASE_DB_USER }}
+      PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      PGSSLMODE: "require"
+      PGCONNECT_TIMEOUT: "15"
+
+    steps:
+      - name: Validate database configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -z "${PGHOST:-}" ]; then
+            echo "SUPABASE_DB_HOST is missing."
+            exit 1
+          fi
+
+          if [ -z "${PGUSER:-}" ]; then
+            echo "SUPABASE_DB_USER is missing."
+            exit 1
+          fi
+
+          if [ -z "${PGPASSWORD:-}" ]; then
+            echo "SUPABASE_DB_PASSWORD is missing."
+            exit 1
+          fi
+
+      - name: Install PostgreSQL client
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-client
+
+      - name: Execute keep-alive query
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          RESULT="$(
+            psql \
+              --no-password \
+              --set=ON_ERROR_STOP=1 \
+              --tuples-only \
+              --no-align \
+              --command="
+                SELECT
+                  NOW() AT TIME ZONE 'UTC' AS keep_alive_utc,
+                  CURRENT_DATABASE() AS database_name,
+                  CURRENT_USER AS database_user;
+              "
+          )"
+
+          echo "Supabase database connection successful."
+          echo "${RESULT}"
+
+          {
+            echo "## Supabase database keep-alive"
+            echo ""
+            echo "- Status: Successful"
+            echo "- Database: \`${PGDATABASE}\`"
+            echo "- Completed: \`$(date -u +"%Y-%m-%d %H:%M:%S UTC")\`"
+          } >> "${GITHUB_STEP_SUMMARY}"
