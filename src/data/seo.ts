@@ -2,44 +2,75 @@ export type PageSeo = {
   path: string;
   title: string;
   description: string;
+  keywords?: string[];
 };
 
 export const pageSeo: Record<string, PageSeo> = {
   home: {
     path: "/",
-    title: "AhasanHub",
+    title: "AhasanHub | Enterprise AI Systems, ERP Architecture & Software Platforms",
     description:
-      "AhasanHub is a premium enterprise technology consulting platform for AI, ERP, cloud, SaaS, and software architecture.",
+      "AhasanHub engineers intelligent enterprise systems, ERP architecture, cloud systems, and proprietary software platforms (Custom ERP, Custom CRM, AI Commerce).",
+    keywords: [
+      "enterprise technology consulting",
+      "AI engineering",
+      "ERP architecture",
+      "Dynamics 365 Business Central",
+      "cloud DevOps",
+      "custom enterprise software",
+    ],
   },
   about: {
     path: "/about",
-    title: "About AhasanHub",
+    title: "About AhasanHub | Enterprise Technology Consulting & Engineering",
     description:
-      "Learn about AhasanHub, a premium consulting brand focused on AI, ERP, cloud architecture, SaaS platforms, and digital transformation.",
+      "Learn about AhasanHub, a premium technology consulting practice specializing in AI systems, ERP architecture, cloud platforms, and software transformation.",
   },
   services: {
     path: "/services",
-    title: "Services",
+    title: "Enterprise Technology Consulting & Engineering Services | AhasanHub",
     description:
-      "Explore AhasanHub consulting and engineering services across AI, ERP, cloud, SaaS, full-stack development, and software architecture.",
+      "Specialized engineering and architecture consulting: AI system development, Dynamics 365 ERP architecture, cloud DevOps, SaaS platform engineering, and custom software systems.",
+    keywords: [
+      "AI system development",
+      "ERP architecture consulting",
+      "Dynamics 365 Business Central integration",
+      "cloud infrastructure DevOps",
+      "SaaS platform engineering",
+      "software architecture consulting",
+      "enterprise digital transformation",
+      "full-stack application development",
+    ],
   },
   projects: {
     path: "/projects",
-    title: "Projects",
+    title: "Projects & Engineering Case Studies | AhasanHub",
     description:
-      "Review selected AhasanHub projects, delivery outcomes, engineering work, and future enterprise technology case studies.",
+      "Review selected AhasanHub projects, delivery outcomes, engineering architectures, and enterprise technology implementations.",
   },
   insights: {
     path: "/insights",
-    title: "Insights",
+    title: "Technology Insights & Engineering Articles | AhasanHub",
     description:
-      "Read AhasanHub insights on AI, ERP, cloud systems, SaaS architecture, software engineering, and digital transformation strategy.",
+      "In-depth analysis and technical writing on AI systems, ERP modernization, cloud architecture, and SaaS software engineering.",
   },
   products: {
     path: "/products",
-    title: "Enterprise Software Products | ERP, CRM & Commerce | AhasanHub",
+    title: "Enterprise Software Products | AI ERP, CRM & Commerce Platforms | AhasanHub",
     description:
-      "Explore Custom ERP AI Enabled, Custom CRM AI Enabled, and Ecommerce with AI Agent from AhasanHub—enterprise software for ERP, customer management, digital commerce, integration and business operations.",
+      "Production-ready enterprise software platforms: Custom ERP AI Enabled for operations and ledger accounting, Custom CRM AI Enabled for B2B sales pipelines, and Ecommerce with AI Agent for modular digital commerce.",
+    keywords: [
+      "enterprise software products",
+      "Custom ERP AI Enabled",
+      "Custom CRM AI Enabled",
+      "Ecommerce with AI Agent",
+      "AI ERP platform",
+      "B2B CRM software",
+      "headless commerce AI agent",
+      "business software licensing",
+      "order to cash ERP",
+      "double entry accounting software",
+    ],
   },
   contact: {
     path: "/contact",

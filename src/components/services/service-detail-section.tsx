@@ -64,7 +64,8 @@ export function ServiceDetailSection() {
             return (
               <article
                 key={service.id}
-                className="grid items-stretch gap-5 lg:grid-cols-[1.05fr_0.95fr]"
+                id={service.id}
+                className="grid items-stretch gap-5 lg:grid-cols-[1.05fr_0.95fr] scroll-mt-24"
               >
                 <div
                   className={cn(

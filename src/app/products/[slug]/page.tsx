@@ -45,9 +45,21 @@ export async function generateMetadata({
   const canonicalUrl = new URL(path, siteConfig.url);
   const ogImage = new URL(siteConfig.logoPath, siteConfig.url);
 
+  const keywords = [
+    product.name,
+    product.displayName,
+    product.category,
+    ...product.architectureTags,
+    ...product.targetAudience,
+    "enterprise software",
+    "software licensing",
+    "AI automation",
+  ];
+
   return {
     title,
     description,
+    keywords,
     alternates: {
       canonical: canonicalUrl,
     },
@@ -86,6 +98,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   }
 
   const productUrl = new URL(`/products/${product.slug}`, siteConfig.url);
+  const ogImage = new URL(siteConfig.logoPath, siteConfig.url);
 
   // Factual JSON-LD Schema without fake reviews, ratings, or prices
   const productJsonLd = {
@@ -95,8 +108,18 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     headline: product.headline,
     description: product.description,
     applicationCategory: "BusinessApplication",
+    applicationSubCategory: product.category,
     operatingSystem: "Cloud, Web-based, Linux, Windows",
     url: productUrl.toString(),
+    featureList: product.keyCapabilities.slice(0, 8),
+    screenshot: ogImage.toString(),
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      price: "0",
+      priceCurrency: "USD",
+      description: "Available for commercial licensing and dedicated enterprise deployment",
+    },
     provider: {
       "@type": "Organization",
       name: siteConfig.name,

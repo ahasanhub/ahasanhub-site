@@ -8,12 +8,14 @@ type SeoMetadataOptions = {
   title: string;
   description: string;
   path?: string;
+  keywords?: string[];
 };
 
 export function createSeoMetadata({
   title,
   description,
   path = "/",
+  keywords,
 }: SeoMetadataOptions): Metadata {
   const canonicalPath = path === "/" ? "/" : path.replace(/\/$/, "");
   const url = new URL(canonicalPath, siteConfig.url);
@@ -22,6 +24,7 @@ export function createSeoMetadata({
   return {
     title,
     description,
+    keywords,
     alternates: {
       canonical: url,
     },
