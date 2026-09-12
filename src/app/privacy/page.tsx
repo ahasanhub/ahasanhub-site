@@ -33,7 +33,7 @@ export default function PrivacyPage() {
               1. Introduction
             </h2>
             <p className="leading-7 text-muted-foreground">
-              AhasanHub ("we," "our," or "us") provides premium enterprise technology consulting services. We respect your privacy and process personal data in accordance with applicable data protection laws, including the General Data Protection Regulation (GDPR).
+              AhasanHub (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) provides premium enterprise technology consulting services. We respect your privacy and process personal data in accordance with applicable data protection laws, including the General Data Protection Regulation (GDPR).
             </p>
           </section>
 
@@ -86,7 +86,7 @@ export default function PrivacyPage() {
               We use first-party cookies for essential site functionality and third-party cookies (such as Google Analytics) to analyze web traffic. You can customize your preferences using the cookie banner that appears on our site, or adjust your browser settings to decline cookies.
             </p>
             <p className="leading-7 text-muted-foreground">
-              For more information on how to manage your cookie preferences, please consult your browser help files or visit our website's consent preferences widget.
+              For more information on how to manage your cookie preferences, please consult your browser help files or visit our website&apos;s consent preferences widget.
             </p>
           </section>
 

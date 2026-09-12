@@ -57,25 +57,36 @@ export function HeroSection({
 
       <Container>
         <div className="mx-auto max-w-5xl text-center [animation:fade-up_600ms_ease-out_both]">
-          <Badge
-            variant="neutral"
-            className="gap-3 rounded-full border border-tech/20 bg-surface/82 px-4 py-2.5 text-sm font-bold text-foreground shadow-[0_16px_36px_color-mix(in_srgb,var(--tech)_14%,transparent)] backdrop-blur-xl dark:border-tech/20 dark:bg-surface/60 sm:text-base"
-          >
-            <span
-              aria-hidden="true"
-              className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-tech-muted text-sm font-extrabold text-tech"
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Badge
+              variant="neutral"
+              className="gap-3 rounded-full border border-tech/20 bg-surface/82 px-4 py-2.5 text-sm font-bold text-foreground shadow-[0_16px_36px_color-mix(in_srgb,var(--tech)_14%,transparent)] backdrop-blur-xl dark:border-tech/20 dark:bg-surface/60 sm:text-base"
             >
-              <Network className="size-5" />
-            </span>
-            <span>{eyebrow}</span>
-          </Badge>
+              <span
+                aria-hidden="true"
+                className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-tech-muted text-sm font-extrabold text-tech"
+              >
+                <Network className="size-5" />
+              </span>
+              <span>{eyebrow}</span>
+            </Badge>
+
+            <Link
+              href="#software-products"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-surface/82 px-4 py-2.5 text-xs sm:text-sm font-bold text-primary shadow-xs backdrop-blur-xl transition duration-200 hover:border-primary/40 hover:bg-primary-muted/20"
+            >
+              <span className="size-2 rounded-full bg-primary" />
+              <span>Software Platforms &amp; Products</span>
+              <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
           <h1 className="mx-auto mt-8 max-w-5xl text-[2.05rem] font-extrabold leading-[1.04] text-foreground min-[375px]:text-[2.25rem] sm:text-[3.1rem] lg:text-[3.5rem] xl:text-[3.9rem]">
             {title}
           </h1>
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
             {description}
           </p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col justify-center items-center gap-3 sm:flex-row">
             <Link
               href={primaryCta.href}
               aria-label={`${primaryCta.label} with AhasanHub`}
@@ -85,9 +96,16 @@ export function HeroSection({
               <ArrowRight aria-hidden="true" className="size-4" />
             </Link>
             <Link
+              href="/products"
+              aria-label="Explore Software Products from AhasanHub"
+              className="inline-flex h-11 items-center justify-center rounded-xl border border-white/50 bg-surface/70 px-5 text-base font-semibold text-foreground shadow-[0_14px_34px_color-mix(in_srgb,var(--foreground)_7%,transparent)] backdrop-blur-xl transition duration-200 hover:-translate-y-0.5 hover:bg-surface/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring dark:border-white/10 dark:bg-surface/55 dark:hover:bg-surface/75"
+            >
+              Explore Software Products
+            </Link>
+            <Link
               href={secondaryCta.href}
               aria-label={`${secondaryCta.label} from AhasanHub`}
-              className="inline-flex h-11 items-center justify-center rounded-xl border border-white/50 bg-surface/70 px-5 text-base font-semibold text-foreground shadow-[0_14px_34px_color-mix(in_srgb,var(--foreground)_7%,transparent)] backdrop-blur-xl transition duration-200 hover:-translate-y-0.5 hover:bg-surface/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring dark:border-white/10 dark:bg-surface/55 dark:hover:bg-surface/75"
+              className="inline-flex h-11 items-center justify-center rounded-xl border border-transparent px-4 text-sm font-semibold text-muted-foreground transition duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
               {secondaryCta.label}
             </Link>

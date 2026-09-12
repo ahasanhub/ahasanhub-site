@@ -1,6 +1,6 @@
 import { featuredProducts, type FeaturedProduct } from "@/data/products";
 import { cn } from "@/lib/utils";
-import { Container, Badge, Card } from "@/components/ui";
+import { Container, Card } from "@/components/ui";
 
 export type FeaturedProductsSectionProps = {
   className?: string;
@@ -13,81 +13,73 @@ export function FeaturedProductsSection({
 }: FeaturedProductsSectionProps) {
   return (
     <section
-      aria-labelledby="featured-products-title"
+      id="product-labs"
+      aria-labelledby="product-labs-title"
       className={cn(
-        "border-b border-border bg-background py-section-y sm:py-section-y-sm lg:py-section-y-lg",
+        "border-b border-border bg-surface py-section-y sm:py-section-y-sm lg:py-section-y-lg",
         className,
       )}
     >
       <Container>
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-            Featured Products &amp; SaaS Systems
+          <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            Research &amp; Engineering Labs
           </p>
           <h2
-            id="featured-products-title"
-            className="mt-4 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl"
+            id="product-labs-title"
+            className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
           >
-            Product concepts engineered for operational outcomes
+            Product Labs &amp; Platform Capabilities
           </h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            In addition to our core commercial platforms (Custom ERP AI Enabled, Custom CRM AI Enabled, Ecommerce with AI Agent), AhasanHub
+            maintains reusable architectural blueprints, automation toolkits, and infrastructure
+            accelerators to support custom client implementations.
+          </p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => {
-            const userBadgeVariant = 
-              product.targetUsers === "Enterprise"
-                ? "premium"
-                : product.targetUsers === "Developers"
-                ? "tech"
-                : "primary";
-
-            return (
-              <Card
-                key={product.name}
-                className="flex h-full flex-col rounded-2xl border border-border/80 bg-surface/50 p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-border-strong hover:bg-surface hover:shadow-lg"
-              >
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product) => (
+            <Card
+              key={product.name}
+              className="flex h-full flex-col justify-between rounded-xl border border-border/70 bg-background/60 p-5 shadow-xs transition duration-200 hover:border-border-strong hover:bg-background"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[11px] font-mono font-medium text-muted-foreground uppercase">
                     {product.category}
                   </span>
-                  <Badge variant={userBadgeVariant}>
+                  <span className="rounded bg-surface-muted px-2 py-0.5 text-[10px] font-mono text-muted-foreground border border-border">
                     {product.targetUsers}
-                  </Badge>
+                  </span>
                 </div>
 
-                <h3 className="mt-5 text-xl font-bold text-foreground tracking-tight">
+                <h3 className="mt-3 text-base font-bold text-foreground">
                   {product.name}
                 </h3>
                 
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
                   {product.description}
                 </p>
 
-                {/* Use Case Box */}
-                <div className="mt-5 rounded-xl border border-border bg-background/50 p-4 text-xs leading-5">
-                  <span className="font-semibold text-foreground block mb-1">Use Case:</span>
-                  <span className="text-muted-foreground">{product.useCase}</span>
+                <div className="mt-3 rounded-lg border border-border/60 bg-surface/50 p-3 text-[11px] leading-relaxed text-muted-foreground">
+                  <span className="font-semibold text-foreground block mb-0.5">Focus:</span>
+                  {product.useCase}
                 </div>
+              </div>
 
-                {/* Tech Stack Pills */}
-                <div className="mt-auto pt-6 border-t border-border/40">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block mb-3">
-                    Technology Stack
+              <div className="mt-4 pt-3 border-t border-border/40 flex flex-wrap gap-1">
+                {product.techStack.map((tech) => (
+                  <span 
+                    key={tech} 
+                    className="inline-flex items-center rounded border border-border/60 bg-surface-muted px-1.5 py-0.5 text-[10px] font-mono text-muted-foreground"
+                  >
+                    {tech}
                   </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {product.techStack.map((tech) => (
-                      <span 
-                        key={tech} 
-                        className="inline-flex items-center rounded-md border border-border bg-surface-muted px-2 py-0.5 text-xs text-foreground font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            );
-          })}
+                ))}
+              </div>
+            </Card>
+          ))}
         </div>
       </Container>
     </section>

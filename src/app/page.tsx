@@ -3,6 +3,7 @@ import {
   ContactCTASection,
   CoreServicesSection,
   HeroSection,
+  HomeProductsSection,
   InsightsSection,
   ProjectsSection,
 } from "@/components/sections";
@@ -15,6 +16,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <HomeProductsSection />
       <CoreServicesSection />
       <ProjectsSection />
       <InsightsSection />

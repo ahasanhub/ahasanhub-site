@@ -33,7 +33,7 @@ export default function TermsPage() {
               1. Acceptance of Terms
             </h2>
             <p className="leading-7 text-muted-foreground">
-              By accessing this website, purchasing digital products, or engaging AhasanHub ("we," "our," or "us") for consulting services, you agree to be bound by these Terms of Service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.
+              By accessing this website, purchasing digital products, or engaging AhasanHub (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) for consulting services, you agree to be bound by these Terms of Service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.
             </p>
           </section>
 

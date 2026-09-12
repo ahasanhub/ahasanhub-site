@@ -23,35 +23,35 @@ export function ProductsCTASection({ className }: ProductsCTASectionProps) {
       <Container>
         <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-center">
           <div className="max-w-3xl text-center lg:text-left">
-            <p className="text-sm font-semibold uppercase tracking-wider text-tech">
-              Get Started
+            <p className="text-xs font-mono font-bold uppercase tracking-wider text-tech">
+              Commercial Discussion
             </p>
             <h2
               id="products-cta-title"
-              className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl"
+              className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl"
             >
-              Build Your Own Digital Product Ecosystem
+              Ready to See the Product in Action?
             </h2>
-            <p className="mt-5 text-base leading-7 text-white/80 max-w-2xl mx-auto lg:mx-0">
-              Partner with AhasanHub to design, engineer, and deploy high-performance SaaS platforms,
-              ERP integrations, and custom automated tools tailored for modern business growth.
+            <p className="mt-4 text-sm leading-relaxed text-white/80 max-w-2xl mx-auto lg:mx-0 sm:text-base">
+              Tell us which platform you are evaluating and what business process you want to improve.
+              We can discuss product fit, customization, deployment, integration and commercial options.
             </p>
           </div>
 
-          <div className="flex flex-col justify-center gap-4 sm:flex-row lg:flex-col xl:flex-row">
+          <div className="flex flex-col justify-center gap-3 sm:flex-row lg:flex-col xl:flex-row">
             <Link
-              href="/contact"
-              aria-label="Start a Project with AhasanHub"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-primary px-6 text-base font-semibold text-primary-foreground shadow-[0_16px_36px_color-mix(in_srgb,var(--primary)_30%,transparent)] transition duration-200 hover:-translate-y-0.5 hover:bg-primary/95 hover:shadow-[0_20px_42px_color-mix(in_srgb,var(--primary)_40%,transparent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              href="/contact?intent=demo"
+              aria-label="Request a product demonstration"
+              className="inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-primary/95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Start a Project
+              Request a Demo
             </Link>
             <Link
-              href="/services"
-              aria-label="Explore AhasanHub Services"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 bg-white/10 px-6 text-base font-semibold text-white backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              href="/contact?intent=pricing"
+              aria-label="Get commercial pricing and licensing details"
+              className="inline-flex h-11 items-center justify-center rounded-xl border border-white/20 bg-white/10 px-5 text-sm font-semibold text-white backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Explore Services
+              Get Pricing
             </Link>
           </div>
         </div>

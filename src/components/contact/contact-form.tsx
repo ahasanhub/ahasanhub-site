@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Check } from "lucide-react";
 import {
   Button,
@@ -18,7 +19,24 @@ const fieldGroupStyles = "grid gap-2";
 const labelStyles = "text-sm font-medium text-foreground";
 const helperTextStyles = "text-xs leading-5 text-muted-foreground";
 
+const inquiryTypes = [
+  "Product Demo",
+  "Pricing / Licensing",
+  "Custom Implementation",
+  "Integration",
+  "Partnership",
+  "General Consultation",
+];
+
+const availableProducts = [
+  "General (No Specific Product)",
+  "Custom ERP AI Enabled",
+  "Custom CRM AI Enabled",
+  "Ecommerce with AI Agent",
+];
+
 const projectTypes = [
+  "Enterprise Software Implementation",
   "AI System Design & Automation",
   "ERP Architecture",
   "Cloud Infrastructure & DevOps",
@@ -38,14 +56,39 @@ const budgetRanges = [
 
 const adminApiUrl = process.env.NEXT_PUBLIC_ADMIN_API_URL?.replace(/\/$/, "");
 
-export function ContactForm() {
+function getInitialProduct(param: string | null): string {
+  const p = param?.toLowerCase();
+  if (p === "custom-erp-ai-enabled" || p === "brainerp") return "Custom ERP AI Enabled";
+  if (p === "custom-crm-ai-enabled" || p === "braincrm") return "Custom CRM AI Enabled";
+  if (p === "ecommerce-with-ai-agent" || p === "decoberri") return "Ecommerce with AI Agent";
+  return "General (No Specific Product)";
+}
+
+function getInitialIntent(param: string | null): string {
+  const i = param?.toLowerCase();
+  if (i === "demo") return "Product Demo";
+  if (i === "pricing") return "Pricing / Licensing";
+  if (i === "custom") return "Custom Implementation";
+  if (i === "integration") return "Integration";
+  return "Product Demo";
+}
+
+function ContactFormInner() {
+  const searchParams = useSearchParams();
+
+  const [inquiryType, setInquiryType] = useState<string>(() =>
+    getInitialIntent(searchParams.get("intent")),
+  );
+  const [selectedProduct, setSelectedProduct] = useState<string>(() =>
+    getInitialProduct(searchParams.get("product")),
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submittedData, setSubmittedData] = useState<{
     fullName: string;
     email: string;
-    projectType: string;
+    focus: string;
   } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,9 +100,21 @@ export function ContactForm() {
     const fullName = formData.get("fullName") as string;
     const email = formData.get("email") as string;
     const company = formData.get("company") as string;
+    const formInquiryType = (formData.get("inquiryType") as string) || inquiryType;
+    const formProduct = (formData.get("product") as string) || selectedProduct;
     const projectType = formData.get("projectType") as string;
     const budgetRange = formData.get("budgetRange") as string;
     const message = formData.get("message") as string;
+
+    const consolidatedProjectType =
+      formProduct && formProduct !== "General (No Specific Product)"
+        ? `${formProduct} (${formInquiryType})`
+        : `${formInquiryType} - ${projectType || "General Consulting"}`;
+
+    const formattedMessage =
+      formProduct && formProduct !== "General (No Specific Product)"
+        ? `[Inquiry Context]\nProduct: ${formProduct}\nInquiry Type: ${formInquiryType}\n\n[Message]\n${message}`
+        : `[Inquiry Context]\nInquiry Type: ${formInquiryType}\nProject Type: ${projectType}\n\n[Message]\n${message}`;
 
     try {
       if (!adminApiUrl) {
@@ -73,9 +128,9 @@ export function ContactForm() {
           fullName,
           emailAddress: email,
           company,
-          projectType,
+          projectType: consolidatedProjectType,
           budgetRange,
-          message,
+          message: formattedMessage,
         }),
       });
 
@@ -94,7 +149,11 @@ export function ContactForm() {
         throw new Error(errorMessage);
       }
 
-      setSubmittedData({ fullName, email, projectType });
+      setSubmittedData({
+        fullName,
+        email,
+        focus: formProduct && formProduct !== "General (No Specific Product)" ? `${formProduct} • ${formInquiryType}` : consolidatedProjectType,
+      });
       setIsSubmitted(true);
     } catch (err) {
       if (err instanceof Error) {
@@ -151,7 +210,7 @@ export function ContactForm() {
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Focus Area:</span>
-              <span className="font-medium text-foreground">{submittedData.projectType}</span>
+              <span className="font-medium text-foreground">{submittedData.focus}</span>
             </div>
           </div>
           <p className="text-sm text-center text-muted-foreground leading-6">
@@ -182,10 +241,10 @@ export function ContactForm() {
       className="min-w-0 rounded-2xl border-border/80 bg-background/85 shadow-[0_18px_44px_color-mix(in_srgb,var(--foreground)_8%,transparent)] backdrop-blur transition duration-200 hover:border-border-strong"
     >
       <CardHeader className="border-b border-border/70">
-        <CardTitle id="project-inquiry-title">Project inquiry</CardTitle>
+        <CardTitle id="project-inquiry-title">Project &amp; Product Inquiry</CardTitle>
         <CardDescription id="project-inquiry-description">
           Required fields are marked. Your inquiry is sent securely to the
-          AhasanHub admin workspace.
+          AhasanHub engineering workspace.
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-card">
@@ -195,6 +254,50 @@ export function ContactForm() {
           onSubmit={handleSubmit}
           className="grid gap-5"
         >
+          {/* Inquiry Type & Specific Product Selectors */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className={fieldGroupStyles}>
+              <label className={labelStyles} htmlFor="inquiry-type">
+                Inquiry Type <span aria-hidden="true" className="text-primary">*</span>
+              </label>
+              <select
+                id="inquiry-type"
+                name="inquiryType"
+                className={fieldStyles}
+                value={inquiryType}
+                onChange={(e) => setInquiryType(e.target.value)}
+                required
+                disabled={isSubmitting}
+              >
+                {inquiryTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className={fieldGroupStyles}>
+              <label className={labelStyles} htmlFor="product-choice">
+                Software Platform <span className="text-muted-foreground">(optional)</span>
+              </label>
+              <select
+                id="product-choice"
+                name="product"
+                className={fieldStyles}
+                value={selectedProduct}
+                onChange={(e) => setSelectedProduct(e.target.value)}
+                disabled={isSubmitting}
+              >
+                {availableProducts.map((prod) => (
+                  <option key={prod} value={prod}>
+                    {prod}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           <div className="grid gap-4 sm:grid-cols-2">
             <div className={fieldGroupStyles}>
               <label className={labelStyles} htmlFor="full-name">
@@ -247,19 +350,16 @@ export function ContactForm() {
 
             <div className={fieldGroupStyles}>
               <label className={labelStyles} htmlFor="project-type">
-                Project Type <span aria-hidden="true" className="text-primary">*</span>
+                Focus Area / Scope <span aria-hidden="true" className="text-primary">*</span>
               </label>
               <select
                 id="project-type"
                 name="projectType"
                 className={fieldStyles}
-                defaultValue=""
+                defaultValue="Enterprise Software Implementation"
                 required
                 disabled={isSubmitting}
               >
-                <option value="" disabled>
-                  Select project type
-                </option>
                 {projectTypes.map((projectType) => (
                   <option key={projectType} value={projectType}>
                     {projectType}
@@ -300,8 +400,8 @@ export function ContactForm() {
             <textarea
               id="message"
               name="message"
-              className="min-h-40 w-full rounded-xl border border-border bg-background/80 px-3 py-3 text-sm leading-6 text-foreground shadow-sm outline-none transition duration-200 placeholder:text-muted-foreground hover:border-border-strong focus:border-border-strong focus:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-              placeholder="Share the business problem, timeline, current systems, and what success should look like."
+              className="min-h-36 w-full rounded-xl border border-border bg-background/80 px-3 py-3 text-sm leading-6 text-foreground shadow-sm outline-none transition duration-200 placeholder:text-muted-foreground hover:border-border-strong focus:border-border-strong focus:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              placeholder="Share your business process, platform requirements, timeline, and what success looks like."
               required
               disabled={isSubmitting}
             />
@@ -320,13 +420,27 @@ export function ContactForm() {
             type="submit"
             size="lg"
             className="w-full transition duration-200 hover:-translate-y-0.5 sm:w-fit"
-            aria-label="Request consultation"
+            aria-label="Submit inquiry"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Sending..." : "Request Consultation"}
+            {isSubmitting ? "Sending..." : "Submit Inquiry"}
           </Button>
         </form>
       </CardContent>
     </Card>
+  );
+}
+
+export function ContactForm() {
+  return (
+    <Suspense
+      fallback={
+        <div className="rounded-2xl border border-border bg-surface p-8 text-center text-sm text-muted-foreground">
+          Loading contact form...
+        </div>
+      }
+    >
+      <ContactFormInner />
+    </Suspense>
   );
 }

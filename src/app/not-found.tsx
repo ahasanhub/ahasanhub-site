@@ -25,7 +25,7 @@ export default function NotFound() {
           </h1>
 
           <p className="mx-auto max-w-lg text-lg text-muted-foreground">
-            The page you are looking for might have been removed, had its name changed, or is temporarily unavailable. Let's get you back to creating and growing.
+            The page you are looking for might have been removed, had its name changed, or is temporarily unavailable. Let&apos;s get you back to creating and growing.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">

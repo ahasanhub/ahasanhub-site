@@ -37,9 +37,9 @@ export const pageSeo: Record<string, PageSeo> = {
   },
   products: {
     path: "/products",
-    title: "Products",
+    title: "Enterprise Software Products | ERP, CRM & Commerce | AhasanHub",
     description:
-      "Discover future AhasanHub products, SaaS concepts, digital tools, and reusable systems for modern business operations.",
+      "Explore Custom ERP AI Enabled, Custom CRM AI Enabled, and Ecommerce with AI Agent from AhasanHub—enterprise software for ERP, customer management, digital commerce, integration and business operations.",
   },
   contact: {
     path: "/contact",

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
+import { CommercialOptionsSection } from "@/components/products/commercial-options-section";
 import { FeaturedProductsSection } from "@/components/products/featured-products-section";
-import { ProductArchitectureSection } from "@/components/products/product-architecture-section";
-import { ProductCategoriesSection } from "@/components/products/product-categories-section";
-import { ProductPhilosophySection } from "@/components/products/product-philosophy-section";
-import { ProductRoadmapSection } from "@/components/products/product-roadmap-section";
-import { ProductUseCasesSection } from "@/components/products/product-use-cases-section";
+import { ProductComparisonSection } from "@/components/products/product-comparison-section";
+import { ProductEcosystemSection } from "@/components/products/product-ecosystem-section";
+import { ProductPortfolioSection } from "@/components/products/product-portfolio-section";
 import { ProductsCTASection } from "@/components/products/products-cta-section";
 import { ProductsHeroSection } from "@/components/products/products-hero-section";
+import { WhyProductsSection } from "@/components/products/why-products-section";
 import { pageSeo } from "@/data/seo";
 import { createSeoMetadata } from "@/lib/seo";
 
@@ -16,12 +16,12 @@ export default function ProductsPage() {
   return (
     <main>
       <ProductsHeroSection />
-      <ProductPhilosophySection />
+      <ProductPortfolioSection />
+      <ProductComparisonSection />
+      <CommercialOptionsSection />
+      <WhyProductsSection />
+      <ProductEcosystemSection />
       <FeaturedProductsSection />
-      <ProductCategoriesSection />
-      <ProductUseCasesSection />
-      <ProductArchitectureSection />
-      <ProductRoadmapSection />
       <ProductsCTASection />
     </main>
   );

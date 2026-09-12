@@ -9,4 +9,8 @@ export {
   CoreServicesSection,
   type CoreServicesSectionProps,
 } from "./core-services-section";
+export {
+  HomeProductsSection,
+  type HomeProductsSectionProps,
+} from "./home-products-section";
 export { ServicesSection, type ServicesSectionProps } from "./services-section";
